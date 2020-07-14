@@ -11,21 +11,20 @@ namespace MovieFriend.Controllers
 {
     [Route("api/moviefriend")]
     [ApiController]
-    public class EventController : ControllerBase
+    public class MovieController : ControllerBase
     {
-        EventRepository _repository;
-
-        public EventController(EventRepository repository)
+        MovieRepository _repository;
+        public MovieController(MovieRepository repository)
         {
             _repository = repository;
         }
-        // get all events
-        [HttpGet("events/all/")]
-        public IActionResult GetAllEvents()
+        // get all movies
+        [HttpGet("movies/all/")]
+        public IActionResult GetAllMovies()
         {
-            var events = _repository.GetAllEvents();
+            var movies = _repository.GetAllMovies();
 
-            return Ok(events);
+            return Ok(movies);
         }
     }
 }

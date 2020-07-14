@@ -28,6 +28,10 @@ namespace MovieFriend
         {
             services.AddControllers();
             services.AddTransient<EventRepository>();
+            services.AddTransient<InviteRepository>();
+            services.AddTransient<MovieRepository>();
+            services.AddTransient<MovieChoicesRepository>();
+            services.AddTransient<UserRepository>();
             services.AddSingleton<IConfiguration>(Configuration);
         }
 
