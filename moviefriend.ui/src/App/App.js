@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AllUsers from '../components/pages/AllUsers/AllUsers';
+import AllMovieChoices from '../components/pages/AllMovieChoices/AllMovieChoices';
 import './App.scss';
 
 class App extends React.Component {
@@ -17,6 +18,7 @@ class App extends React.Component {
           Test
         </button>
         <AllUsers />
+        <AllMovieChoices />
     </div>
     );
   }
