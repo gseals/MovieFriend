@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AllUsers from '../components/pages/AllUsers/AllUsers';
 import './App.scss';
 
 class App extends React.Component {
@@ -15,6 +16,7 @@ class App extends React.Component {
         >
           Test
         </button>
+        <AllUsers />
     </div>
     );
   }
