@@ -16,7 +16,7 @@ class SingleUser extends Component {
                 <li>First Name: {user.firstName}</li>
                 <li>Last Name: {user.lastName}</li>
                 <li>E-Mail: {user.email}</li>
-                <li>Date Joined: {user.dateTime}</li>
+                <li>Date Joined: {user.dateJoined}</li>
             </ul>
         </div>
       );

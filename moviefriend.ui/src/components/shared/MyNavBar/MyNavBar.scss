@@ -1,0 +1,49 @@
+.MyNavBar {
+    display: block;
+    position: fixed!important;
+    right: 0;
+    top: 0;
+    left: 0;
+    z-index: 15;
+    width: 100%;
+    // margin-bottom: 30px;
+    }
+  
+  nav li {
+    display: inline-block;
+    border-right: 1px solid #ccc;
+    padding: 0 .25em;
+    }
+  
+  nav li:last-child {
+    border: 0;
+  }  
+  
+  nav div {
+    display: inline-block;
+    border-right: 1px solid #ccc;
+    padding: 0 .25em;
+    }
+  
+    nav div:last-child {
+      border: 0;
+    } 
+  
+    .userImg {
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+    }
+  
+    .navFont {
+      font-size: 1.25rem;
+      color: black !important;
+    }
+  
+    .profileBackground {
+      font-weight: bold;
+    }
+  
+  .removeMarginRight {
+    margin-right: 0;
+  }

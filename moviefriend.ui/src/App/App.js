@@ -1,36 +1,43 @@
 import React, { Component } from 'react';
+
+import {
+  BrowserRouter as Router, Route, Redirect, Switch,
+} from 'react-router-dom';
+
 import AllUsers from '../components/pages/AllUsers/AllUsers';
 import AllMovieChoices from '../components/pages/AllMovieChoices/AllMovieChoices';
 import AllMovies from '../components/pages/AllMovies/AllMovies';
 import AllInvites from '../components/pages/AllInvites/AllInvites';
 import AllEvents from '../components/pages/AllEvents/AllEvents';
+import MyNavBar from '../components/shared/MyNavBar/MyNavBar';
 
 import './App.scss';
 
-class App extends React.Component {
-  testClick() {
-    console.log('test');
+const PrivateRoute = ({ component: Component, authed, ...rest }) => {
+  const routeChecker = (props) => (authed === true ? <Component {...props} {...rest}/> : <Redirect to={{ pathname: '/auth', state: { from: props.location } }} />);
+  return <Route {...rest} render={(props) => routeChecker(props)} />;
+};
+
+class App extends Component {
+  state ={
+    authed: true,
   }
 
   render() {
+    const { authed } = this.state;
+
     return (
     <div className="App">
-      <button
-        className="btn btn-danger"
-        onClick={() => this.testClick()}
-        >
-          Test
-        </button>
-        <h2>Users</h2>
-        <AllUsers />
-        <h2>Movie Choices</h2>
-        <AllMovieChoices />
-        <h2>Movies</h2>
-        <AllMovies />
-        <h2>Invites</h2>
-        <AllInvites />
-        <h2>Events</h2>
-        <AllEvents />
+      <Router>
+        <MyNavBar authed={authed} />
+        <Switch>
+          <Route path="/users" exact component={AllUsers} authed={authed} />
+          <Route path="/moviechoices" exact component={AllMovieChoices} authed={authed} />
+          <Route path="/movies" exact component={AllMovies} authed={authed} />
+          <Route path="/events" exact component={AllEvents} authed={authed} />
+          <Route path="/invites" exact component={AllInvites}authed={authed} />
+        </Switch>
+      </Router>
     </div>
     );
   }
