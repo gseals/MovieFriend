@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import AllUsers from '../components/pages/AllUsers/AllUsers';
 import AllMovieChoices from '../components/pages/AllMovieChoices/AllMovieChoices';
 import AllMovies from '../components/pages/AllMovies/AllMovies';
+import AllInvites from '../components/pages/AllInvites/AllInvites';
 import './App.scss';
 
 class App extends React.Component {
@@ -24,6 +25,8 @@ class App extends React.Component {
         <AllMovieChoices />
         <h2>Movies</h2>
         <AllMovies />
+        <h2>Invites</h2>
+        <AllInvites />
     </div>
     );
   }
