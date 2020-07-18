@@ -3,6 +3,8 @@ import AllUsers from '../components/pages/AllUsers/AllUsers';
 import AllMovieChoices from '../components/pages/AllMovieChoices/AllMovieChoices';
 import AllMovies from '../components/pages/AllMovies/AllMovies';
 import AllInvites from '../components/pages/AllInvites/AllInvites';
+import AllEvents from '../components/pages/AllEvents/AllEvents';
+
 import './App.scss';
 
 class App extends React.Component {
@@ -27,6 +29,8 @@ class App extends React.Component {
         <AllMovies />
         <h2>Invites</h2>
         <AllInvites />
+        <h2>Events</h2>
+        <AllEvents />
     </div>
     );
   }
