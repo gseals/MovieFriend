@@ -27,6 +27,12 @@ namespace MovieFriend
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddCors(options =>
+                options.AddPolicy("ItsAllGood",
+                    builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin())
+            );
+
             services.AddTransient<EventRepository>();
             services.AddTransient<InviteRepository>();
             services.AddTransient<MovieRepository>();
@@ -46,6 +52,8 @@ namespace MovieFriend
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("ItsAllGood");
 
             app.UseAuthorization();
 

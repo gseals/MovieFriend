@@ -7,7 +7,7 @@ namespace MovieFriend.Models
 {
     public class MovieChoices
     {
-        public int MovieChoiesId { get; set; }
+        public int MovieChoicesId { get; set; }
         public int MovieId { get; set; }
         public int EventId { get; set; }
         public int Votes { get; set; }
