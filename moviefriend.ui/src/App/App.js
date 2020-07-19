@@ -5,21 +5,24 @@ import {
 } from 'react-router-dom';
 
 import firebase from 'firebase/app';
+import 'firebase/auth';
+import firebaseConnection from '../helpers/data/connection';
 
+import Auth from '../components/pages/Auth/Auth';
 import AllUsers from '../components/pages/AllUsers/AllUsers';
 import AllMovieChoices from '../components/pages/AllMovieChoices/AllMovieChoices';
 import AllMovies from '../components/pages/AllMovies/AllMovies';
 import AllInvites from '../components/pages/AllInvites/AllInvites';
 import AllEvents from '../components/pages/AllEvents/AllEvents';
+import MovieDatabase from '../components/pages/MovieDatabase/MovieDataBaseMain/MovieDatabase';
 import MyNavBar from '../components/shared/MyNavBar/MyNavBar';
 
 import './App.scss';
 
-import 'firebase/auth';
-
-import firebaseConnection from '../helpers/data/connection';
-
-import Auth from '../components/pages/Auth/Auth';
+const PublicRoute = ({ component: Component, authed, ...rest }) => {
+  const routeChecker = (props) => (authed === false ? <Component {...props} {...rest}/> : <Redirect to={{ pathname: '/', state: { from: props.location } }} />);
+  return <Route {...rest} render={(props) => routeChecker(props)} />;
+};
 
 const PrivateRoute = ({ component: Component, authed, ...rest }) => {
   const routeChecker = (props) => (authed === true ? <Component {...props} {...rest}/> : <Redirect to={{ pathname: '/auth', state: { from: props.location } }} />);
@@ -30,7 +33,7 @@ firebaseConnection();
 
 class App extends Component {
   state = {
-    authed: false,
+    authed: true,
   }
 
   componentDidMount() {
@@ -56,11 +59,13 @@ class App extends Component {
         <MyNavBar authed={authed} />
         <div className="display-margin-top">
         <Switch>
-          <Route path="/auth" exact component={Auth} authed={authed}/>
+          <PublicRoute path="/auth" exact component={Auth} authed={authed}/>
 
           <PrivateRoute path="/users" exact component={AllUsers} authed={authed} />
           <PrivateRoute path="/moviechoices" exact component={AllMovieChoices} authed={authed} />
+          <PrivateRoute path="/" exact component={AllMovies} authed={authed} />
           <PrivateRoute path="/movies" exact component={AllMovies} authed={authed} />
+          <PrivateRoute path="/movieDatabase" exact component={MovieDatabase} authed={authed} />
           <PrivateRoute path="/events" exact component={AllEvents} authed={authed} />
           <PrivateRoute path="/invites" exact component={AllInvites}authed={authed} />
         </Switch>

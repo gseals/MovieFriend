@@ -12,11 +12,19 @@ import {
 
 import PropTypes from 'prop-types';
 
+import firebase from 'firebase/app';
+import 'firebase/auth';
+
 import './MyNavBar.scss';
 
 class MyNavBar extends React.Component {
   state = {
     isOpen: false,
+  }
+
+  logMeOut = (e) => {
+    e.preventDefault();
+    firebase.auth().signOut();
   }
 
   static propTypes = {
@@ -43,6 +51,9 @@ class MyNavBar extends React.Component {
             <Link className="nav-link navFont btn btn-info" to="/movieChoices">MovieChoices</Link>
           </NavItem>
           <NavItem className="nav-item">
+            <Link className="nav-link navFont btn btn-info" to="/moviedatabase">MovieDatabase</Link>
+          </NavItem>
+          <NavItem className="nav-item">
             <Link className="nav-link navFont btn btn-info" to="/movies">Movies</Link>
           </NavItem>
           <NavItem className="nav-item">
@@ -52,7 +63,7 @@ class MyNavBar extends React.Component {
             <Link className="nav-link navFont btn btn-info" to="/invites">Invites</Link>
           </NavItem>
           <NavItem className="nav-item">
-            <Link className="nav-link navFont btn btn-danger" onClick={this.logMeOut}>Logout</Link>
+            <button className="nav-link navFont btn btn-danger" onClick={this.logMeOut}>Logout</button>
           </NavItem>
         </Nav>
         );
