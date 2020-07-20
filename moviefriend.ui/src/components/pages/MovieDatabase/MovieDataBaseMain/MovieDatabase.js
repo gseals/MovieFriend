@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Search from '../Search/Search';
 import Results from '../Results/Results';
-import Popup from '../Popup/Popup';
 
 import apiKeys from '../../../../helpers/apiKeys.json';
 
@@ -29,11 +28,6 @@ function MovieDatabase() {
     }
   };
 
-  const handleInput = (e) => {
-    const s = e.target.value;
-    setState((prevState) => ({ ...prevState, s }));
-  };
-
   const openPopup = (id) => {
     axios(`${apiUrl}&i=${id}`).then(({ data }) => {
       const result = data;
@@ -41,22 +35,19 @@ function MovieDatabase() {
     });
   };
 
-  const closePopup = () => {
-    setState((prevState) => ({ ...prevState, selected: {} }));
+  const handleInput = (e) => {
+    const s = e.target.value;
+    setState((prevState) => ({ ...prevState, s }));
   };
 
   return (
     <div className="App">
       <header>
-        <h1><span>React Movie Database</span></h1>
+        <h1><span>Movie Database</span></h1>
       </header>
       <main>
-        <Search handleInput={handleInput} search={search}/>
-        <Results results={state.results} openPopup={openPopup}/>
-
-        {(typeof state.selected.Title != 'undefined')
-          ? <Popup selected={state.selected} closePopup={closePopup} />
-          : false}
+        <Search handleInput={handleInput} search={search} />
+        <Results results={state.results} selected={state.selected} openPopup={openPopup} />
       </main>
     </div>
   );
