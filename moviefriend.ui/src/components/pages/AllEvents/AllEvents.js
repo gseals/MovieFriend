@@ -1,6 +1,6 @@
 import React from 'react';
 import SingleEvent from '../../shared/SingleEvent/SingleEvent';
-import eventData from '../../../helpers/data/eventData';
+import { getAllEvents, getEventsByEventId } from '../../../helpers/data/eventData';
 import './AllEvents.scss';
 
 class AllEvents extends React.Component {
@@ -8,12 +8,21 @@ class AllEvents extends React.Component {
       events: [],
     }
 
-    componentDidMount() {
-      eventData.getAllEvents()
-        .then((events) => {
-          this.setState({ events });
+    getAllEventsInComponent = () => {
+      getAllEvents()
+        .then((event) => {
+          this.setState({ event });
         })
         .catch((errorFromGetEvents) => console.error({ errorFromGetEvents }));
+    }
+
+    componentDidMount() {
+      const { events } = this.state;
+      getEventsByEventId(events.eventId)
+        .then((event) => {
+          this.setState({ event });
+        })
+        .catch((errorFromGetEventsByEventId) => console.error({ errorFromGetEventsByEventId }));
     }
 
     render() {

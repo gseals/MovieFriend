@@ -3,7 +3,13 @@ import axios from 'axios';
 const getAllEvents = () => new Promise((resolve, reject) => {
   axios.get('https://localhost:44389/api/moviefriend/events/all')
     .then((result) => resolve(result.data))
-    .catch((error) => reject(error));
+    .catch((errorFromGetAllEvents) => reject(errorFromGetAllEvents));
 });
 
-export default { getAllEvents };
+const getEventsByEventId = (eventId) => new Promise((resolve, reject) => {
+  axios.get(`https://localhost:44389/api/moviefriend/events/${eventId}`)
+    .then((result) => resolve(result.data))
+    .catch((errorGetEventsByEventId) => reject(errorGetEventsByEventId));
+});
+
+export { getAllEvents, getEventsByEventId };

@@ -43,7 +43,7 @@ function MovieDatabase() {
   return (
     <div className="App">
       <header>
-        <h1><span>Movie Database</span></h1>
+        <h1><span>Find Your Next Favorite Movie</span></h1>
       </header>
       <main>
         <Search handleInput={handleInput} search={search} />
