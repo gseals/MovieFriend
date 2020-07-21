@@ -119,10 +119,11 @@ FROM MovieChoices
 JOIN Movie on Movie.MovieId = MovieChoices.MovieId
 JOIN Event on Event.EventId = MovieChoices.EventId
 
-SELECT *
+SELECT Event.HostId, Event.[DateTime], Event.[Location], Event.[DateEventCreated], Event.Notes, Movie.MovieTitle, Movie.MoviePoster, [User].FirstName, [User].LastName
 FROM Event
 JOIN Movie on Movie.MovieId = Event.MovieId
 JOIN [User] on [User].UserId = Event.HostId
+WHERE Event.EventId = 3
 
 SELECT *
 FROM Invite
