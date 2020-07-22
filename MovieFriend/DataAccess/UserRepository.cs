@@ -23,5 +23,15 @@ namespace MovieFriend.DataAccess
                 return db.Query<User>("SELECT * FROM [User]");
             }
         }
+
+        public User GetUserByFirebaseUid(string firebaseUid)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new { FirebaseUid = firebaseUid };
+                var Sql = "SELECT * FROM [User] where FirebaseUid = @firebaseUid";
+                return db.QueryFirst<User>(Sql, parameters);
+            }
+        }
     }
 }

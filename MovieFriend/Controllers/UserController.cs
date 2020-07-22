@@ -27,5 +27,14 @@ namespace MovieFriend.Controllers
 
             return Ok(users);
         }
+
+        // api/moviefriend/OsiM38S0luW81im2RDGpwQtYiKo1
+        [HttpGet("users/{firebaseUid}/")]
+        public IActionResult GetUserByFirebaseUid(string firebaseUid)
+        {
+            var specificUser = _repository.GetUserByFirebaseUid(firebaseUid);
+
+            return Ok(specificUser);
+        }
     }
 }

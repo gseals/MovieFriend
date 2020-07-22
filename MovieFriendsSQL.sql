@@ -34,7 +34,8 @@ CREATE TABLE [User] (
 	[FirstName] [nvarchar](max) NOT NULL,
 	[LastName] [nvarchar](max) NOT NULL,
 	[Email] [nvarchar](max) NOT NULL,
-	[DateJoined] [datetime] NOT NULL
+	[DateJoined] [datetime] NOT NULL,
+	FirebaseUid nvarchar(500) NULL
 )
 
 -- adding foreign keys
@@ -119,13 +120,35 @@ FROM MovieChoices
 JOIN Movie on Movie.MovieId = MovieChoices.MovieId
 JOIN Event on Event.EventId = MovieChoices.EventId
 
-SELECT Event.HostId, Event.[DateTime], Event.[Location], Event.[DateEventCreated], Event.Notes, Movie.MovieTitle, Movie.MoviePoster, [User].FirstName, [User].LastName
+SELECT Event.[DateTime], Event.[Location], Event.[DateEventCreated], Event.Notes, Movie.MovieTitle, Movie.MoviePoster, [User].FirstName, [User].LastName
 FROM Event
 JOIN Movie on Movie.MovieId = Event.MovieId
 JOIN [User] on [User].UserId = Event.HostId
 WHERE Event.EventId = 3
 
 SELECT *
+FROM Event
+JOIN Movie on Movie.MovieId = Event.MovieId
+JOIN [User] on [User].UserId = Event.HostId
+
+SELECT *
 FROM Invite
 JOIN [User] on [User].UserId = Invite.UserId
 JOIN Event on Event.EventId = Invite.EventId
+
+/* get events for host */
+SELECT *
+FROM [Event]
+JOIN [User] ON Event.HostId = [User].UserId
+WHERE [User].UserId = 1
+
+/* get events for user */
+SELECT *
+FROM [Event]
+JOIN Invite ON Event.EventId = Invite.EventId
+JOIN [User] ON Invite.UserId = [User].UserId
+WHERE [User].UserId = 1
+
+UPDATE [User]
+SET [User].FirebaseUid = 'OsiM38S0luW81im2RDGpwQtYiKo1'
+WHERE [User].UserId = 1
