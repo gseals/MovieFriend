@@ -36,5 +36,13 @@ namespace MovieFriend.Controllers
 
             return Ok(theseEvents);
         }
+        // get events by user id
+        [HttpGet("events/user/{userId}/")]
+        public IActionResult GetEventsByUserId(int userId)
+        {
+            var userEvents = _repository.GetEventsByUserId(userId);
+
+            return Ok(userEvents);
+        }
     }
 }

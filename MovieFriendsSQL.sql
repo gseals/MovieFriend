@@ -147,6 +147,7 @@ SELECT *
 FROM [Event]
 JOIN Invite ON Event.EventId = Invite.EventId
 JOIN [User] ON Invite.UserId = [User].UserId
+JOIN Movie ON Event.MovieId = Movie.MovieId
 WHERE [User].UserId = 1
 
 UPDATE [User]

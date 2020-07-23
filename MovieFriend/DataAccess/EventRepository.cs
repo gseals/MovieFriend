@@ -40,6 +40,21 @@ namespace MovieFriend.DataAccess
                 return result;
             }
         }
+        public IEnumerable<EventsByUserId> GetEventsByUserId(int userId)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new { UserId = userId };
 
+                var Sql = @"SELECT *
+                            FROM [Event]
+                            JOIN Invite ON Event.EventId = Invite.EventId
+                            JOIN [User] ON Invite.UserId = [User].UserId
+                            JOIN Movie ON Event.MovieId = Movie.MovieId
+                            WHERE [User].UserId = @userId";
+
+                return db.Query<EventsByUserId>(Sql, parameters);
+            }
+        }
     }
 }
