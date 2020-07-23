@@ -12,7 +12,7 @@ const getAllUsers = () => new Promise((resolve, reject) => {
 const getUid = () => firebase.auth().currentUser.uid;
 
 const getUserByUid = () => {
-  const firebaseUid = getUid(); // OsiM38S0luW81im2RDGpwQtYiKo1
+  const firebaseUid = getUid();
   axios.get(`https://localhost:44389/api/moviefriend/users/${firebaseUid}`)
     .then((result) => {
       const { userId } = result.data;

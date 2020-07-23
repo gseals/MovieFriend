@@ -1,6 +1,7 @@
 import React from 'react';
 import SingleEvent from '../../shared/SingleEvent/SingleEvent';
-import { getAllEvents, getEventsByEventId } from '../../../helpers/data/eventData';
+import eventData from '../../../helpers/data/eventData';
+import userData from '../../../helpers/data/userData';
 import './AllEvents.scss';
 
 class AllEvents extends React.Component {
@@ -8,21 +9,20 @@ class AllEvents extends React.Component {
       events: [],
     }
 
-    getAllEventsInComponent = () => {
-      getAllEvents()
-        .then((event) => {
-          this.setState({ event });
-        })
-        .catch((errorFromGetEvents) => console.error({ errorFromGetEvents }));
-    }
+    // getEventsByEventId(events.eventId)
+    // .then((event) => {
+    //   this.setState({ event });
+    // })
+    // .catch((errorFromGetEventsByEventId) => console.error({ errorFromGetEventsByEventId }));
 
     componentDidMount() {
-      const { events } = this.state;
-      getEventsByEventId(events.eventId)
-        .then((event) => {
-          this.setState({ event });
+      // this data contains more lines that could be displayed, like firstName, lastName, email
+      const userId = userData.getLoggedInUserId();
+      eventData.getEventsByUserId(userId)
+        .then((events) => {
+          this.setState({ events });
         })
-        .catch((errorFromGetEventsByEventId) => console.error({ errorFromGetEventsByEventId }));
+        .catch((errorFromGetEvents) => console.error({ errorFromGetEvents }));
     }
 
     render() {
