@@ -44,24 +44,24 @@ class MyNavBar extends React.Component {
         <Nav className="navbar-nav ml-auto">
           <div className="d-flex flex-row">
           </div>
-          <NavItem className="nav-item">
+          {/* <NavItem className="nav-item">
             <Link className="nav-link navFont btn btn-info" to="/users">Users</Link>
           </NavItem>
           <NavItem className="nav-item">
             <Link className="nav-link navFont btn btn-info" to="/movieChoices">MovieChoices</Link>
-          </NavItem>
+          </NavItem> */}
           <NavItem className="nav-item">
             <Link className="nav-link navFont btn btn-info" to="/moviedatabase">MovieDatabase</Link>
           </NavItem>
-          <NavItem className="nav-item">
+          {/* <NavItem className="nav-item">
             <Link className="nav-link navFont btn btn-info" to="/movies">Movies</Link>
-          </NavItem>
+          </NavItem> */}
           <NavItem className="nav-item">
-            <Link className="nav-link navFont btn btn-info" to="/events">Events</Link>
+            <Link className="nav-link navFont btn btn-info" to="/movienights">Movie Nights</Link>
           </NavItem>
-          <NavItem className="nav-item">
+          {/* <NavItem className="nav-item">
             <Link className="nav-link navFont btn btn-info" to="/invites">Invites</Link>
-          </NavItem>
+          </NavItem> */}
           <NavItem className="nav-item">
             <button className="nav-link navFont btn btn-danger" onClick={this.logMeOut}>Logout</button>
           </NavItem>

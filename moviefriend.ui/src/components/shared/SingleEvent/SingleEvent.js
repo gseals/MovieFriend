@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import eventShape from '../../../helpers/propz/eventShape';
 import './SingleEvent.scss';
 
@@ -15,7 +16,7 @@ class SingleEvent extends Component {
                 {/* <li>EventId: {event.eventId}</li>
                 <li>MovieId: {event.movieId}</li>
                 <li>HostId: {event.hostId}</li> */}
-                <li>Date and time of party: moment({event.dateTime}).format('ll')</li>
+                <li>Date and time of party: {moment(event.dateTime).format('ll')}</li>
                 <li>This event was at {event.location}</li>
                 {/* <li>Date Event Created: {event.dateEventCreated}</li> */}
                 <img src={event.moviePoster} alt={`movie poster for ${event.movieTitle}`} />
