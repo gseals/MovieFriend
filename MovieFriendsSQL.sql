@@ -62,10 +62,10 @@ VALUES('Abra', 'Abramson', 'aa@test.com', '2020-01-19'),
 	  ('Edward', 'Elijah', 'ee@test.com', '2020-05-19')
 
 INSERT INTO Movie(MovieTitle, MoviePoster)
-VALUES('Aliens', 'https://images-na.ssl-images-amazon.com/images/I/51cAAgWdFfL._AC_.jpg'),
-	  ('Bumblebee', 'https://images-na.ssl-images-amazon.com/images/I/71LlMXBogbL._AC_SY606_.jpg'),
-	  ('Cabaret', 'https://images-na.ssl-images-amazon.com/images/I/61NTI5GVF-L._AC_SY879_.jpg'),
-	  ('Disturbia', 'https://images-na.ssl-images-amazon.com/images/I/41jCoj%2By2WL._AC_.jpg')
+VALUES('Aliens', 'https://m.media-amazon.com/images/M/MV5BZGU2OGY5ZTYtMWNhYy00NjZiLWI0NjUtZmNhY2JhNDRmODU3XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg'),
+	  ('Bumblebee', 'https://m.media-amazon.com/images/M/MV5BMjUwNjU5NDMyNF5BMl5BanBnXkFtZTgwNzgxNjM2NzM@._V1_SX300.jpg'),
+	  ('Cabaret', 'https://m.media-amazon.com/images/M/MV5BNTEyMzc0Mjk5MV5BMl5BanBnXkFtZTgwMjI2NDIwMTE@._V1_SX300.jpg'),
+	  ('Disturbia', 'https://m.media-amazon.com/images/M/MV5BMTMyNTIxOTQ3M15BMl5BanBnXkFtZTcwMjU2NzAzMw@@._V1_SX300.jpg')
 
 INSERT INTO MovieChoices(MovieId, EventId, Votes)
 VALUES(1, 1, 0),
