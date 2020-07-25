@@ -14,10 +14,13 @@ namespace MovieFriend.Controllers
     public class EventController : ControllerBase
     {
         EventRepository _repository;
+        InviteRepository _inviteRepository;
+        MovieRepository _movieRepository;
 
-        public EventController(EventRepository repository)
+        public EventController(EventRepository repository, InviteRepository inviteRepository)
         {
             _repository = repository;
+            _inviteRepository = inviteRepository;
         }
         // get all events
         [HttpGet("events/all/")]
@@ -43,6 +46,27 @@ namespace MovieFriend.Controllers
             var userEvents = _repository.GetEventsByUserId(userId);
 
             return Ok(userEvents);
+        }
+        // get events by host id
+        [HttpGet("events/host/{userId}/")]
+        public IActionResult GetEventsByHostId(int userId)
+        {
+            var hostEvents = _repository.GetEventsByHostId(userId);
+
+            return Ok(hostEvents);
+        }
+        // create events
+        [HttpPost("events/")]
+        public IActionResult CreateEvent(NewEventWithInvites NewEvent)
+        {
+            var newCreatedEvent = _repository.CreateEvent(NewEvent);
+            foreach(var userId in NewEvent.InvitedUsers)
+            {
+                _inviteRepository.CreateInvite(userId, newCreatedEvent.eventId);
+            }
+            var newMovie = _movieRepository.CreateMovie(NewEvent.MovieDBId);
+
+            return Ok(newCreatedEvent);
         }
     }
 }

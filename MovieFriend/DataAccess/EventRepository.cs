@@ -56,5 +56,35 @@ namespace MovieFriend.DataAccess
                 return db.Query<EventsByUserId>(Sql, parameters);
             }
         }
+        public IEnumerable<EventsByHostId> GetEventsByHostId(int userId)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new { UserId = userId };
+
+                var Sql = @"SELECT*
+                            FROM[Event]
+                            JOIN[User] ON Event.HostId = [User].UserId
+                            JOIN Movie ON Event.MovieId = Movie.MovieId
+                            WHERE [User].UserId = @userId";
+
+                return db.Query<EventsByHostId>(Sql, parameters);
+            }
+        }
+        //public IEnumerable<EventsByHostId> GetEventsByHostId(int userId)
+        //{
+        //    using (var db = new SqlConnection(ConnectionString))
+        //    {
+        //        var parameters = new { UserId = userId };
+
+        //        var Sql = @"SELECT*
+        //                    FROM[Event]
+        //                    JOIN[User] ON Event.HostId = [User].UserId
+        //                    JOIN Movie ON Event.MovieId = Movie.MovieId
+        //                    WHERE [User].UserId = @userId";
+
+        //        return db.Query<EventsByHostId>(Sql, parameters);
+        //    }
+        //}this will require the good ol' output .*
     }
 }

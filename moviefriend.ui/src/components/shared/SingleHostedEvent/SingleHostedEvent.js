@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import singleEventShape from '../../../helpers/propz/singleEventShape';
-import './SingleEvent.scss';
+import singleHostedEventShape from '../../../helpers/propz/singleHostedEventShape';
+import './SingleHostedEvent.scss';
 
-class SingleEvent extends Component {
+class SingleHostedEvent extends Component {
     static propTypes = {
-      event: singleEventShape.singleEventShape,
+      event: singleHostedEventShape.singleHostedEventShape,
     }
 
     render() {
@@ -28,4 +28,4 @@ class SingleEvent extends Component {
     }
 }
 
-export default SingleEvent;
+export default SingleHostedEvent;

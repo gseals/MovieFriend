@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import SingleEvent from '../../shared/SingleEvent/SingleEvent';
+import SingleHostedEvent from '../../shared/SingleHostedEvent/SingleHostedEvent';
 import eventData from '../../../helpers/data/eventData';
 import userData from '../../../helpers/data/userData';
 import './AllEvents.scss';
@@ -8,6 +9,7 @@ import './AllEvents.scss';
 class AllEvents extends React.Component {
     state = {
       events: [],
+      hostEvents: [],
     }
 
     componentDidMount() {
@@ -18,10 +20,15 @@ class AllEvents extends React.Component {
           this.setState({ events });
         })
         .catch((errorFromGetEvents) => console.error({ errorFromGetEvents }));
+      eventData.getEventsByHostId(userId)
+        .then((hostEvents) => {
+          this.setState({ hostEvents });
+        })
+        .catch((errorFromGetHostEvents) => console.error({ errorFromGetHostEvents }));
     }
 
     render() {
-      const { events } = this.state;
+      const { events, hostEvents } = this.state;
       // just look at that conditional. it works so well.
       const pastEvents = [];
       const futureEvents = [];
@@ -34,15 +41,33 @@ class AllEvents extends React.Component {
         }
       }
 
+      const pastHostedEvents = [];
+      const futureHostedEvents = [];
+      for (let i = 0; i < hostEvents.length; i += 1) {
+        if (new Date() > (moment(hostEvents[i].dateTime))) {
+          pastHostedEvents.push(hostEvents[i]);
+        } else {
+          futureHostedEvents.push(hostEvents[i]);
+        }
+      }
+
       return (
         <div className="AllEvents">
           <div className="PastEvents">
-          Past Events
+          <p>Past Events</p>
         { pastEvents.map((event) => <SingleEvent key={event.eventId} event={event} />)}
           </div>
           <div className="FutureEvents">
-          Future Events
+          <p>Future Events</p>
         { futureEvents.map((event) => <SingleEvent key={event.eventId} event={event} />)}
+          </div>
+          <div>
+          <p>Events You've Hosted in the Past</p>
+        { pastHostedEvents.map((event) => <SingleHostedEvent key={event.eventId} event={event} />)}
+          </div>
+          <div>
+          <p>Upcoming Events You are Hosting</p>
+        { futureHostedEvents.map((event) => <SingleHostedEvent key={event.eventId} event={event} />)}
           </div>
         </div>
       );

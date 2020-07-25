@@ -18,4 +18,15 @@ const getEventsByUserId = (userId) => new Promise((resolve, reject) => {
     .catch((errorGetEventsByUserId) => reject(errorGetEventsByUserId));
 });
 
-export default { getAllEvents, getEventsByEventId, getEventsByUserId };
+const getEventsByHostId = (userId) => new Promise((resolve, reject) => {
+  axios.get(`https://localhost:44389/api/moviefriend/events/host/${userId}`)
+    .then((result) => resolve(result.data))
+    .catch((errorGetEventsByHostId) => reject(errorGetEventsByHostId));
+});
+
+export default {
+  getAllEvents,
+  getEventsByEventId,
+  getEventsByUserId,
+  getEventsByHostId,
+};

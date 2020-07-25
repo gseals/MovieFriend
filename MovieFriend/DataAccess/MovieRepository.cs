@@ -23,5 +23,16 @@ namespace MovieFriend.DataAccess
                 return db.Query<Movie>("SELECT * FROM Movie");
             }
         }
+        public Movie CreateMovie(NewEventWithInvites NewEvent)
+        {
+            var sql = @"INSERT INTO [Movie](MovieTitle, MoviePoster, MovieDBId)
+                       VALUES(@MovieTitle, @MoviePoster, @MovieDBId)";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var result = db.QueryFirstOrDefault<Movie>(sql, NewEvent);
+                return result;
+            }
+        }
     }
 }

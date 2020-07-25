@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const eventShape = PropTypes.shape({
+const singleEventShape = PropTypes.shape({
   eventId: PropTypes.number.isRequired,
   movieId: PropTypes.number,
   hostId: PropTypes.number.isRequired,
@@ -18,4 +18,4 @@ const eventShape = PropTypes.shape({
   moviePoster: PropTypes.string.isRequired,
 });
 
-export default { eventShape };
+export default { singleEventShape };

@@ -2,6 +2,7 @@
 
 CREATE TABLE Movie (
 	[MovieId] [int]  NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	[MovieDBId] [nvarchar](100) NOT NULL,
 	[MovieTitle] [nvarchar](max) NOT NULL,
 	[MoviePoster] [nvarchar](500) NOT NULL,
 )
@@ -165,3 +166,29 @@ WHERE [User].UserId = 2
 UPDATE [User]
 SET [User].Email = 'jtestaddress2@gmail.com'
 WHERE [User].UserId = 2
+
+SELECT *
+FROM [Event]
+JOIN [User] ON Event.HostId = [User].UserId
+JOIN Movie ON Event.MovieId = Movie.MovieId
+WHERE [User].UserId = 1
+
+ALTER TABLE [Movie] ADD [MovieDBId] [nvarchar](100) NULL
+
+UPDATE [Movie]
+SET [Movie].MovieDbId = 'tt0090605'
+WHERE [Movie].MovieId = 1
+
+UPDATE [Movie]
+SET [Movie].MovieDbId = 'tt4701182'
+WHERE [Movie].MovieId = 2
+
+UPDATE [Movie]
+SET [Movie].MovieDbId = 'tt0068327'
+WHERE [Movie].MovieId = 3
+
+UPDATE [Movie]
+SET [Movie].MovieDbId = 'tt0486822'
+WHERE [Movie].MovieId = 4
+
+
