@@ -151,5 +151,17 @@ JOIN Movie ON Event.MovieId = Movie.MovieId
 WHERE [User].UserId = 1
 
 UPDATE [User]
-SET [User].FirebaseUid = 'OsiM38S0luW81im2RDGpwQtYiKo1'
+SET [User].FirebaseUid = 'qqdXTVnDDabwq2X9vWXikUuZvz32'
 WHERE [User].UserId = 1
+
+UPDATE [User]
+SET [User].Email = 'jtestaddress1@gmail.com'
+WHERE [User].UserId = 1
+
+UPDATE [User]
+SET [User].FirebaseUid = 'ArCyHOKtIqYtAslVraPuMERpMPb2'
+WHERE [User].UserId = 2
+
+UPDATE [User]
+SET [User].Email = 'jtestaddress2@gmail.com'
+WHERE [User].UserId = 2

@@ -22,15 +22,12 @@ class AllEvents extends React.Component {
 
     render() {
       const { events } = this.state;
-
+      // just look at that conditional. it works so well.
       const pastEvents = [];
       const futureEvents = [];
-      // const now = Date.now();
-      console.log(events.length);
-      console.log(events[0]);
-      console.log(new Date());
+      const now = Date.now();
       for (let i = 0; i < events.length; i += 1) {
-        if (new Date() > (moment(events[i].dateTime).format('LLLL'))) {
+        if (new Date() > (moment(events[i].dateTime))) {
           pastEvents.push(events[i]);
         } else {
           futureEvents.push(events[i]);
@@ -39,10 +36,6 @@ class AllEvents extends React.Component {
 
       return (
         <div className="AllEvents">
-          {/* <div className="PastEvents">
-          All Events
-        { events.map((event) => <SingleEvent key={event.eventId} event={event} />)}
-          </div> */}
           <div className="PastEvents">
           Past Events
         { pastEvents.map((event) => <SingleEvent key={event.eventId} event={event} />)}
