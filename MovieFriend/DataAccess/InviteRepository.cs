@@ -24,5 +24,18 @@ namespace MovieFriend.DataAccess
                 return db.Query<Invite>("SELECT * FROM Invite");
             }
         }
+        public Invite CreateInvite(int userId, int EventId)
+        {
+            var parameters = new { UserId = userId, EventId = EventId };
+
+            var sql = @"INSERT INTO [Invite]([UserId], [EventId])
+                       VALUES(@userId, @EventId)";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var result = db.QueryFirstOrDefault<Invite>(sql, parameters);
+                return result;
+            }
+        }
     }
 }

@@ -26,6 +26,7 @@ namespace MovieFriend.DataAccess
         public Movie CreateMovie(NewEventWithInvites NewEvent)
         {
             var sql = @"INSERT INTO [Movie](MovieTitle, MoviePoster, MovieDBId)
+                       OUTPUT INSERTED.*
                        VALUES(@MovieTitle, @MoviePoster, @MovieDBId)";
 
             using (var db = new SqlConnection(ConnectionString))

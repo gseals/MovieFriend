@@ -62,29 +62,28 @@ namespace MovieFriend.DataAccess
             {
                 var parameters = new { UserId = userId };
 
-                var Sql = @"SELECT*
+                var sql = @"SELECT*
                             FROM[Event]
                             JOIN[User] ON Event.HostId = [User].UserId
                             JOIN Movie ON Event.MovieId = Movie.MovieId
                             WHERE [User].UserId = @userId";
 
-                return db.Query<EventsByHostId>(Sql, parameters);
+                return db.Query<EventsByHostId>(sql, parameters);
             }
         }
-        //public IEnumerable<EventsByHostId> GetEventsByHostId(int userId)
-        //{
-        //    using (var db = new SqlConnection(ConnectionString))
-        //    {
-        //        var parameters = new { UserId = userId };
+        public Event CreateEvent(NewEventWithInvites NewEvent, int movieId)
+        {
+            var parameters = new { movieId = movieId, HostId = NewEvent.HostId, DateTime = NewEvent.DateTime, Location = NewEvent.Location, Notes = NewEvent.Notes };
+            var sql = @"INSERT INTO [Event](MovieId, HostId, [DateTime], Location, DateEventCreated, Notes)
+                        OUTPUT INSERTED.*
+                        VALUES(@MovieId, @HostId, @DateTime, @Location, getDate(), @Notes)";
 
-        //        var Sql = @"SELECT*
-        //                    FROM[Event]
-        //                    JOIN[User] ON Event.HostId = [User].UserId
-        //                    JOIN Movie ON Event.MovieId = Movie.MovieId
-        //                    WHERE [User].UserId = @userId";
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var result = db.QueryFirstOrDefault<Event>(sql, parameters);
 
-        //        return db.Query<EventsByHostId>(Sql, parameters);
-        //    }
-        //}this will require the good ol' output .*
+                return result;
+            }
+        }
     }
 }
