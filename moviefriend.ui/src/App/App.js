@@ -13,6 +13,7 @@ import AllUsers from '../components/pages/AllUsers/AllUsers';
 import AllMovieChoices from '../components/pages/AllMovieChoices/AllMovieChoices';
 import AllMovies from '../components/pages/AllMovies/AllMovies';
 import AllInvites from '../components/pages/AllInvites/AllInvites';
+import Create from '../components/pages/Create/Create';
 import AllEvents from '../components/pages/AllEvents/AllEvents';
 import MovieDatabase from '../components/pages/MovieDatabase/MovieDataBaseMain/MovieDatabase';
 import MyNavBar from '../components/shared/MyNavBar/MyNavBar';
@@ -65,6 +66,7 @@ class App extends Component {
           <PrivateRoute path="/moviechoices" exact component={AllMovieChoices} authed={authed} /> */}
           <PrivateRoute path="/" exact component={MovieDatabase} authed={authed} />
           <PrivateRoute path="/movieDatabase" exact component={MovieDatabase} authed={authed} />
+          <PrivateRoute path="/movieNights/create" exact component={Create} authed={authed}/>
           {/* <PrivateRoute path="/movies" exact component={AllMovies} authed={authed} /> */}
           <PrivateRoute path="/movieNights" exact component={AllEvents} authed={authed} />
           {/* <PrivateRoute path="/invites" exact component={AllInvites}authed={authed} /> */}

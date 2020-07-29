@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 import SingleEvent from '../../shared/SingleEvent/SingleEvent';
 import SingleHostedEvent from '../../shared/SingleHostedEvent/SingleHostedEvent';
 import eventData from '../../../helpers/data/eventData';
@@ -53,6 +54,9 @@ class AllEvents extends React.Component {
 
       return (
         <div className="AllEvents">
+          <div>
+          <Link className="nav-link navFont btn btn-info" to="/movieNights/create">Read to plan your next movie night?</Link>
+          </div>
           <div className="PastEvents">
           <p>Past Events</p>
         { pastEvents.map((event) => <SingleEvent key={event.eventId} event={event} />)}

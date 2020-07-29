@@ -24,9 +24,12 @@ const getEventsByHostId = (userId) => new Promise((resolve, reject) => {
     .catch((errorGetEventsByHostId) => reject(errorGetEventsByHostId));
 });
 
+const createNewEventAndMovieAndInvite = (newEvent) => axios.post('https://localhost:44389/api/moviefriend/events/', newEvent);
+
 export default {
   getAllEvents,
   getEventsByEventId,
   getEventsByUserId,
   getEventsByHostId,
+  createNewEventAndMovieAndInvite,
 };
