@@ -10,7 +10,7 @@ namespace MovieFriend.Models
         public int EventId { get; set; }
         public string MovieDBId { get; set; }
         public int HostId { get; set; }
-        public DateTime DateTime { get; set; } // "2020-07-27 20:01:42"
+        public DateTime DateTime { get; set; } // "2020-07-27 20:01:42" date and time of movie
         public string Location { get; set; }
         public DateTime DateEventCreated { get; set; }
         public string Notes { get; set; }

@@ -191,4 +191,5 @@ UPDATE [Movie]
 SET [Movie].MovieDbId = 'tt0486822'
 WHERE [Movie].MovieId = 4
 
-
+select *
+from movie
