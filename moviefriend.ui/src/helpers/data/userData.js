@@ -20,7 +20,7 @@ const getUserByUid = () => {
     });
 };
 
-const getLoggedInUserId = () => sessionStorage.getItem('userId');
+const getLoggedInUserId = () => parseInt(sessionStorage.getItem('userId'), 10);
 
 export default {
   getAllUsers,

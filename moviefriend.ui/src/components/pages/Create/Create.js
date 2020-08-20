@@ -21,7 +21,9 @@ class Create extends React.Component {
 
     allPossibleInvites = () => {
       userData.getAllUsers()
-        .then((invites) => this.setState({ possibleInvites: invites }))
+        .then((invites) => {
+          this.setState({ possibleInvites: invites });
+        })
         .catch((err) => console.error('error in get items'));
     }
 
@@ -49,9 +51,16 @@ class Create extends React.Component {
       this.setState({ notes: e.target.value });
     }
 
-    newInvitedUserAction = (e) => {
-      e.preventDefault();
-      this.setState({ invitedUsers: e.target.value });
+    newInvitedUserAction = (selectedItems, lastSelectedItem) => {
+      const selectedFirstName = lastSelectedItem.split(' ')[0];
+      const selectedLastName = lastSelectedItem.split(' ')[1];
+      const selectedUser = this.state.possibleInvites.find((user) => user.firstName === selectedFirstName && user.lastName === selectedLastName);
+      this.setState({
+        invitedUsers: [
+          ...this.state.invitedUsers,
+          selectedUser.userId,
+        ],
+      });
     }
 
     newMovieTitleAction = (e) => {
@@ -71,7 +80,7 @@ class Create extends React.Component {
         hostId: userData.getLoggedInUserId(),
         dateTime: this.state.dateTime,
         location: this.state.location,
-        dateEventCreated: date.createDate(),
+        dateEventCreated: new Date(),
         notes: this.state.notes,
         invitedUsers: this.state.invitedUsers,
         movieTitle: this.state.movieTitle,
@@ -153,10 +162,10 @@ class Create extends React.Component {
           type="text"
           className="form-control"
           id="invites"
-          options={possibleInvites}
+          options={possibleInvites.map((invite) => (`${invite.firstName} ${invite.lastName}`))}
           isObject={false}
           value={invitedUsers}
-          onChange={this.newInvitedUserAction}
+          onSelect={this.newInvitedUserAction}
           required
         />
         </div>
