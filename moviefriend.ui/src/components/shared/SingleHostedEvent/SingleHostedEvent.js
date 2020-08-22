@@ -16,7 +16,7 @@ class SingleHostedEvent extends Component {
                 {/* <li>EventId: {event.eventId}</li>
                 <li>MovieId: {event.movieId}</li>
                 <li>HostId: {event.hostId}</li> */}
-                <li>Date and time of party: {moment(event.dateTime).format('ll')}</li>
+                <li>Date and time of party: {moment(event.dateTime).format('LLL')}</li>
                 <li>This event was at {event.location}</li>
                 {/* <li>Date Event Created: {event.dateEventCreated}</li> */}
                 <img className="eventImage" src={event.moviePoster} alt={`movie poster for ${event.movieTitle}`} />

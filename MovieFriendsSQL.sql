@@ -173,6 +173,12 @@ JOIN [User] ON Event.HostId = [User].UserId
 JOIN Movie ON Event.MovieId = Movie.MovieId
 WHERE [User].UserId = 1
 
+SELECT *
+FROM Invite
+
+SELECT *
+FROM Movie
+
 ALTER TABLE [Movie] ADD [MovieDBId] [nvarchar](100) NULL
 
 UPDATE [Movie]
@@ -192,4 +198,30 @@ SET [Movie].MovieDbId = 'tt0486822'
 WHERE [Movie].MovieId = 4
 
 select *
-from movie
+from [event]
+
+SELECT  *
+FROM invite
+
+SELECT *
+FROM Movie
+
+DELETE
+FROM [Event]
+WHERE EventId = 12
+
+DELETE
+FROM [Invite]
+WHERE EventId = 12
+
+DELETE Movie
+FROM Movie
+INNER JOIN [Event] ON Movie.MovieId = [Event].Movieid
+WHERE Movie.MovieId = 13
+
+DELETE Movie
+USING [Event]
+WHERE Movie.MovieId = [Event].MovieId
+
+SELECT *
+FROM Movie

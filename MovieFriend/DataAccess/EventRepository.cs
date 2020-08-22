@@ -85,5 +85,9 @@ namespace MovieFriend.DataAccess
                 return result;
             }
         }
+        public Event DeleteEventAndMovieAndInvite(int eventId)
+        {
+            var sql = "@delete"
+        }
     }
 }

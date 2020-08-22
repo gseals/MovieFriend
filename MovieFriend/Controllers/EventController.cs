@@ -68,5 +68,12 @@ namespace MovieFriend.Controllers
             }
             return Ok(newCreatedEvent);
         }
+        // delete event
+        [HttpDelete("events//remove/{eventId}")]
+        public IActionResult DeleteEvent(int eventId)
+        {
+            var result = _repository.DeleteEventAndMovieAndInvite(eventId);
+            return Ok(result);
+        }
     }
 }
