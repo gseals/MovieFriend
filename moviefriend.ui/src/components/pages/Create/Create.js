@@ -1,22 +1,27 @@
 import React from 'react';
-
+import axios from 'axios';
 import { Multiselect } from 'multiselect-react-dropdown';
+
+import OneResult from '../MovieDatabase/Result/OneResult';
 
 import eventData from '../../../helpers/data/eventData';
 import userData from '../../../helpers/data/userData';
-import date from '../../../helpers/data/date';
+
+import apiKeys from '../../../helpers/apiKeys.json';
+
 import './Create.scss';
+
+const apiUrl = apiKeys.omdbKeys.databaseURL;
 
 class Create extends React.Component {
     state = {
       possibleInvites: [],
-      movieDBId: '',
+      imdbID: '',
       dateTime: '',
       location: '',
       notes: '',
       invitedUsers: [],
-      movieTitle: '',
-      moviePoster: '',
+      selected: {},
     }
 
     allPossibleInvites = () => {
@@ -27,14 +32,27 @@ class Create extends React.Component {
         .catch((err) => console.error('error in get items'));
     }
 
-    componentDidMount() {
-      this.allPossibleInvites();
+    selectedMovie = () => {
+      const { imdbID } = this.props.match.params;
+      axios(`${apiUrl}&i=${imdbID}`).then(({ data }) => {
+        const result = data;
+        this.setState({
+          selected: result,
+        });
+      });
     }
 
-    newMovieDBIdAction = (e) => {
-      e.preventDefault();
-      this.setState({ movieDBId: e.target.value });
+    componentDidMount() {
+      this.allPossibleInvites();
+      this.selectedMovie();
     }
+
+    openPopup = (id) => {
+      axios(`${apiUrl}&i=${id}`).then(({ data }) => {
+        const result = data;
+        this.setState((prevState) => ({ ...prevState, selected: result }));
+      });
+    };
 
     newDateAndTimeOfEventAction = (e) => {
       e.preventDefault();
@@ -63,44 +81,33 @@ class Create extends React.Component {
       });
     }
 
-    newMovieTitleAction = (e) => {
-      e.preventDefault();
-      this.setState({ movieTitle: e.target.value });
-    }
-
-    newMoviePosterAction = (e) => {
-      e.preventDefault();
-      this.setState({ moviePoster: e.target.value });
-    }
-
     saveMovieEvent = (e) => {
       e.preventDefault();
+      const { imdbID } = this.props.match.params;
       const newEvent = {
-        movieDBId: this.state.movieDBId,
+        movieDBId: imdbID,
         hostId: userData.getLoggedInUserId(),
         dateTime: this.state.dateTime,
         location: this.state.location,
         dateEventCreated: new Date(),
         notes: this.state.notes,
         invitedUsers: this.state.invitedUsers,
-        movieTitle: this.state.movieTitle,
-        moviePoster: this.state.moviePoster,
+        movieTitle: this.state.selected.Title,
+        moviePoster: this.state.selected.Poster,
       };
       eventData.createNewEventAndMovieAndInvite(newEvent)
-        .then(() => this.props.history.push('/movieDatabase'))
+        .then(() => this.props.history.push('/movieNights'))
         .catch((err) => console.error('error from save new event', err));
     }
 
     render() {
       const {
         possibleInvites,
-        movieDBId,
         dateTime,
         location,
         notes,
         invitedUsers,
-        movieTitle,
-        moviePoster,
+        selected,
       } = this.state;
 
       return (
@@ -108,17 +115,13 @@ class Create extends React.Component {
         <div className="Create col-10 m-auto">
         <h1 className="textColor marginTop">Let's plan your next movie night</h1>
         <form onSubmit={this.saveMovieEvent} className="Create col-6 m-auto">
-        <div className="form-group">
-          <h3><label htmlFor="movieDBId"></label></h3>
-          <textarea
-          type="text"
-          className="form-control"
-          id="movieDBId"
-          placeholder="MovieDBId"
-          value={movieDBId}
-          onChange={this.newMovieDBIdAction}
-          required
-          />
+        <div className="centered">
+        <h2 className="textColor marginTop">{selected.Title}? Excellent choice!</h2>
+        <OneResult
+          key={selected.imdbID}
+          selected={selected}
+          openPopup={this.openPopup}
+        />
         </div>
         <div className="form-group">
           <h3><label htmlFor="dateTime"></label></h3>
@@ -131,6 +134,19 @@ class Create extends React.Component {
           onChange={this.newDateAndTimeOfEventAction}
           required
           />
+        </div>
+        <div className="form-group">
+        <h5><label htmlFor="invites">Who are you inviting?</label></h5>
+        <Multiselect
+          type="text"
+          className="form-control"
+          id="invites"
+          options={possibleInvites.map((invite) => (`${invite.firstName} ${invite.lastName}`))}
+          isObject={false}
+          value={invitedUsers}
+          onSelect={this.newInvitedUserAction}
+          required
+        />
         </div>
         <div className="form-group">
           <h3><label htmlFor="location"></label></h3>
@@ -153,43 +169,6 @@ class Create extends React.Component {
           placeholder="Notes"
           value={notes}
           onChange={this.newNotesAction}
-          required
-          />
-        </div>
-        <div className="form-group">
-        <h5><label htmlFor="invites">Who are you inviting?</label></h5>
-        <Multiselect
-          type="text"
-          className="form-control"
-          id="invites"
-          options={possibleInvites.map((invite) => (`${invite.firstName} ${invite.lastName}`))}
-          isObject={false}
-          value={invitedUsers}
-          onSelect={this.newInvitedUserAction}
-          required
-        />
-        </div>
-        <div className="form-group">
-          <h3><label htmlFor="movieTitle"></label></h3>
-          <textarea
-          type="text"
-          className="form-control"
-          id="movieTitle"
-          placeholder="Movie Title"
-          value={movieTitle}
-          onChange={this.newMovieTitleAction}
-          required
-          />
-        </div>
-        <div className="form-group">
-          <h3><label htmlFor="moviePoster"></label></h3>
-          <textarea
-          type="text"
-          className="form-control"
-          id="moviePoster"
-          placeholder="Movie Poster"
-          value={moviePoster}
-          onChange={this.newMoviePosterAction}
           required
           />
         </div>

@@ -54,9 +54,6 @@ class AllEvents extends React.Component {
 
       return (
         <div className="AllEvents">
-          <div>
-          <Link className="nav-link navFont btn btn-info" to="/movieNights/create">Read to plan your next movie night?</Link>
-          </div>
           <div className="PastEvents">
           <p>Past Events</p>
         { pastEvents.map((event) => <SingleEvent key={event.eventId} event={event} />)}

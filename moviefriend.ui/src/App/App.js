@@ -66,7 +66,7 @@ class App extends Component {
           <PrivateRoute path="/moviechoices" exact component={AllMovieChoices} authed={authed} /> */}
           <PrivateRoute path="/" exact component={MovieDatabase} authed={authed} />
           <PrivateRoute path="/movieDatabase" exact component={MovieDatabase} authed={authed} />
-          <PrivateRoute path="/movieNights/create" exact component={Create} authed={authed}/>
+          <PrivateRoute path="/movieNights/:imdbID/create" exact component={Create} authed={authed}/>
           {/* <PrivateRoute path="/movies" exact component={AllMovies} authed={authed} /> */}
           <PrivateRoute path="/movieNights" exact component={AllEvents} authed={authed} />
           {/* <PrivateRoute path="/invites" exact component={AllInvites}authed={authed} /> */}

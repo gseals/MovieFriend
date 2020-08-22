@@ -1,9 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 // on this page, I wrote the ternary for "N/A"
 
 function Result({ result, selected, openPopup }) {
   return (
+    <Link to={`/movieNights/${result.imdbID}/create`}>
     <div className='card'>
         <div className='card-inner'>
             <div className='card-front'>
@@ -23,6 +25,7 @@ function Result({ result, selected, openPopup }) {
             </div>
         </div>
     </div>
+    </Link>
   );
 }
 
