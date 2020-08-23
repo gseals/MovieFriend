@@ -197,27 +197,35 @@ UPDATE [Movie]
 SET [Movie].MovieDbId = 'tt0486822'
 WHERE [Movie].MovieId = 4
 
-select *
-from [event]
-
 SELECT  *
 FROM invite
-
-SELECT *
-FROM Movie
-
-DELETE
-FROM [Event]
-WHERE EventId = 12
 
 DELETE
 FROM [Invite]
 WHERE EventId = 12
 
+SELECT  *
+FROM invite
+
+select *
+from [event]
+
+DELETE
+FROM [Event]
+WHERE EventId = 12
+
+select *
+from [event]
+
+SELECT *
+FROM Movie
+
 DELETE Movie
 FROM Movie
-INNER JOIN [Event] ON Movie.MovieId = [Event].Movieid
 WHERE Movie.MovieId = 13
+
+SELECT *
+FROM Movie
 
 DELETE Movie
 USING [Event]
@@ -225,3 +233,9 @@ WHERE Movie.MovieId = [Event].MovieId
 
 SELECT *
 FROM Movie
+
+select *
+from [event]
+
+SELECT  *
+FROM invite

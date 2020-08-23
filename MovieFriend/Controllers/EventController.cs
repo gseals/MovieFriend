@@ -13,13 +13,13 @@ namespace MovieFriend.Controllers
     [ApiController]
     public class EventController : ControllerBase
     {
-        EventRepository _repository;
+        EventRepository _eventRepository;
         InviteRepository _inviteRepository;
         MovieRepository _movieRepository;
 
         public EventController(EventRepository repository, InviteRepository inviteRepository, MovieRepository movieRepository)
         {
-            _repository = repository;
+            _eventRepository = repository;
             _inviteRepository = inviteRepository;
             _movieRepository = movieRepository;
         }
@@ -27,7 +27,7 @@ namespace MovieFriend.Controllers
         [HttpGet("events/all/")]
         public IActionResult GetAllEvents()
         {
-            var events = _repository.GetAllEvents();
+            var events = _eventRepository.GetAllEvents();
 
             return Ok(events);
         }
@@ -36,15 +36,17 @@ namespace MovieFriend.Controllers
         [HttpGet("events/{eventId}/")]
         public IActionResult GetEventByEventId(int eventId)
         {
-            var theseEvents = _repository.GetEventByEventId(eventId);
+            var theseEvents = _eventRepository.GetEventByEventId(eventId);
 
-            return Ok(theseEvents);
+            var listOfEvent = new List<EventView> { theseEvents }; // this is a hack
+
+            return Ok(listOfEvent);
         }
         // get events by user id
         [HttpGet("events/user/{userId}/")]
         public IActionResult GetEventsByUserId(int userId)
         {
-            var userEvents = _repository.GetEventsByUserId(userId);
+            var userEvents = _eventRepository.GetEventsByUserId(userId);
 
             return Ok(userEvents);
         }
@@ -52,7 +54,7 @@ namespace MovieFriend.Controllers
         [HttpGet("events/host/{userId}/")]
         public IActionResult GetEventsByHostId(int userId)
         {
-            var hostEvents = _repository.GetEventsByHostId(userId);
+            var hostEvents = _eventRepository.GetEventsByHostId(userId);
 
             return Ok(hostEvents);
         }
@@ -61,7 +63,7 @@ namespace MovieFriend.Controllers
         public IActionResult CreateEvent(NewEventWithInvites NewEvent)
         {
             var newMovie = _movieRepository.CreateMovie(NewEvent);
-            var newCreatedEvent = _repository.CreateEvent(NewEvent, newMovie.MovieId);
+            var newCreatedEvent = _eventRepository.CreateEvent(NewEvent, newMovie.MovieId);
             foreach(var userId in NewEvent.InvitedUsers)
             {
                 _inviteRepository.CreateInvite(userId, newCreatedEvent.EventId);
@@ -69,11 +71,15 @@ namespace MovieFriend.Controllers
             return Ok(newCreatedEvent);
         }
         // delete event
-        [HttpDelete("events//remove/{eventId}")]
+        [HttpDelete("events/{eventId}")]
         public IActionResult DeleteEvent(int eventId)
         {
-            var result = _repository.DeleteEventAndMovieAndInvite(eventId);
-            return Ok(result);
+            var eventToDelete = _eventRepository.GetEventByEventId(eventId);
+
+            _inviteRepository.DeleteInvite(eventId);
+            _eventRepository.DeleteEvent(eventId);
+            _movieRepository.DeleteMovie(eventToDelete.MovieId);
+            return Ok(eventToDelete);
         }
     }
 }

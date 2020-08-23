@@ -25,9 +25,9 @@ namespace MovieFriend.DataAccess
             }
         }
 
-        public IEnumerable<EventView> GetEventByEventId(int eventId)
+        public EventView GetEventByEventId(int eventId)
         {
-            var sql = @"SELECT Movie.MovieTitle, Movie.MoviePoster, [User].FirstName, [User].LastName, Event.[DateTime], Event.[Location], Event.[DateEventCreated], Event.Notes
+            var sql = @"SELECT Movie.MovieTitle, Movie.MoviePoster, [User].FirstName, [User].LastName, Event.[DateTime], Event.[Location], Event.[DateEventCreated], Event.Notes, Movie.MovieId
                         FROM Event
                         JOIN Movie on Movie.MovieId = Event.MovieId
                         JOIN [User] on [User].UserId = Event.HostId
@@ -36,7 +36,7 @@ namespace MovieFriend.DataAccess
             using (var db = new SqlConnection(ConnectionString))
             {
                 var parameters = new { eventId = eventId };
-                var result = db.Query<EventView>(sql, parameters);
+                var result = db.QueryFirst<EventView>(sql, parameters);
                 return result;
             }
         }
@@ -85,9 +85,19 @@ namespace MovieFriend.DataAccess
                 return result;
             }
         }
-        public Event DeleteEventAndMovieAndInvite(int eventId)
+
+        public void DeleteEvent(int eventId)
         {
-            var sql = "@delete"
+            var sql = @"DELETE
+                        FROM [Event]
+                        WHERE EventId = @eventId";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new { eventId = eventId };
+                var result = db.Execute(sql, parameters);
+                return;
+            }
         }
     }
 }

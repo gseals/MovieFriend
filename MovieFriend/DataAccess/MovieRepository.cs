@@ -35,5 +35,19 @@ namespace MovieFriend.DataAccess
                 return result;
             }
         }
+
+        public void DeleteMovie(int movieId)
+        {
+            var sql = @"DELETE Movie
+                        FROM Movie
+                        WHERE Movie.MovieId = @movieId";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new { movieId = movieId };
+                var result = db.Execute(sql, parameters);
+                return;
+            }
+        }
     }
 }

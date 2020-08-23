@@ -11,6 +11,7 @@ namespace MovieFriend.Models
         public string Location { get; set; }
         public DateTime DateEventCreated { get; set; }
         public string Notes { get; set; }
+        public int MovieId { get; set; }
         public string MovieTitle { get; set; }
         public string MoviePoster { get; set; }
         public string FirstName { get; set; }
