@@ -26,10 +26,13 @@ const getEventsByHostId = (userId) => new Promise((resolve, reject) => {
 
 const createNewEventAndMovieAndInvite = (newEvent) => axios.post('https://localhost:44389/api/moviefriend/events/', newEvent);
 
+const deleteDataEventAndInviteAndMovie = (eventId) => axios.delete(`https://localhost:44389/api/moviefriend/events/${eventId}`);
+
 export default {
   getAllEvents,
   getEventsByEventId,
   getEventsByUserId,
   getEventsByHostId,
   createNewEventAndMovieAndInvite,
+  deleteDataEventAndInviteAndMovie,
 };

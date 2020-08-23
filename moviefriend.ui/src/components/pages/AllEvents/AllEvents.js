@@ -28,6 +28,18 @@ class AllEvents extends React.Component {
         .catch((errorFromGetHostEvents) => console.error({ errorFromGetHostEvents }));
     }
 
+    deleteEventAndInviteAndMovie = (eventId) => {
+      const userId = userData.getLoggedInUserId();
+      eventData.deleteDataEventAndInviteAndMovie(eventId)
+        .then(() => {
+          eventData.getEventsByHostId(userId)
+            .then((hostEvents) => {
+              this.setState({ hostEvents });
+            })
+            .catch((errorFromGetHostEvents) => console.error({ errorFromGetHostEvents }));
+        });
+    }
+
     render() {
       const { events, hostEvents } = this.state;
       // just look at that conditional. it works so well.
@@ -68,7 +80,7 @@ class AllEvents extends React.Component {
           </div>
           <div>
           <p>Upcoming Events You are Hosting</p>
-        { futureHostedEvents.map((event) => <SingleHostedEvent key={event.eventId} event={event} />)}
+        { futureHostedEvents.map((event) => <SingleHostedEvent key={event.eventId} event={event} deleteEventAndInviteAndMovie={this.deleteEventAndInviteAndMovie} />)}
           </div>
         </div>
       );
