@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import date from '../../../helpers/data/date';
@@ -19,6 +20,7 @@ class SingleHostedEvent extends Component {
 
     render() {
       const { event } = this.props;
+      const { eventId } = this.props.event;
       return (
         <div className="SingleEvent">
             <ul>
@@ -32,9 +34,14 @@ class SingleHostedEvent extends Component {
                 <li>Movie Title: {event.movieTitle}</li>
                 <li>Notes about this event: {event.notes}</li>
                 { moment(event.dateTime).format('LLL') > moment(new Date()).format('LLL')
-                  ? <button className="btn btn-danger" onClick={this.handleDeleteEventAndInviteAndMovie}>
+                  ? <div>
+                <button className="btn btn-danger" onClick={this.handleDeleteEventAndInviteAndMovie}>
                 Delete this event
                 </button>
+                <Link className="btn btn-success" to={`/movieNights/${eventId}/update`}>
+                Edit this event
+                </Link>
+                </div>
                   : null
                 }
             </ul>
