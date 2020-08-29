@@ -25,9 +25,16 @@ class Create extends React.Component {
     }
 
     allPossibleInvites = () => {
+      const userId = userData.getLoggedInUserId();
+      const noHost = [];
       userData.getAllUsers()
         .then((invites) => {
-          this.setState({ possibleInvites: invites });
+          for (let i = 0; i < invites.length; i += 1) {
+            if (invites[i].userId !== userId) {
+              noHost.push(invites[i]);
+            }
+          }
+          this.setState({ possibleInvites: noHost });
         })
         .catch((err) => console.error('error in get items'));
     }
