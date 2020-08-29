@@ -21,6 +21,9 @@ class SingleHostedEvent extends Component {
     render() {
       const { event } = this.props;
       const { eventId } = this.props.event;
+      const eventDateTime = moment(event.dateTime);
+      const now = moment(new Date());
+      const shouldShowButton = eventDateTime > now;
       return (
         <div className="SingleEvent">
             <ul>
@@ -33,7 +36,7 @@ class SingleHostedEvent extends Component {
                 <img className="eventImage" src={event.moviePoster} alt={`movie poster for ${event.movieTitle}`} />
                 <li>Movie Title: {event.movieTitle}</li>
                 <li>Notes about this event: {event.notes}</li>
-                { moment(event.dateTime).format('LLL') > moment(new Date()).format('LLL')
+                { shouldShowButton
                   ? <div>
                 <button className="btn btn-danger" onClick={this.handleDeleteEventAndInviteAndMovie}>
                 Delete this event

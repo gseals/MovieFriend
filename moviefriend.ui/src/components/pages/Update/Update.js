@@ -36,9 +36,9 @@ class Update extends React.Component {
     thisOneEvent = () => {
       const { eventId } = this.props.match.params;
       eventData.getEventsByEventId(eventId)
-        .then((request) => {
-          console.log(request[0]);
-          const event = request[0];
+        .then((response) => {
+          console.log(response[0]);
+          const event = response[0];
           this.setState({
             dateTime: event.dateTime,
             location: event.location,
@@ -149,6 +149,7 @@ class Update extends React.Component {
           options={possibleInvites.map((invite) => (`${invite.firstName} ${invite.lastName}`))}
           isObject={false}
           value={invitedUsers}
+          selectedValues={invitedUsers.map((invite) => (`${invite.firstName} ${invite.lastName}`))}
           onSelect={this.newInvitedUserAction}
           required
         />

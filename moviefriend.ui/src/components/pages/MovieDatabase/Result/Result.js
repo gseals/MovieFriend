@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import posterImage from '../../../../img/noPoster.jpg';
 
 // on this page, I wrote the ternary for "N/A"
 
@@ -9,7 +10,12 @@ function Result({ result, selected, openPopup }) {
     <div className='card'>
         <div className='card-inner'>
             <div className='card-front'>
-                <img src={result.Poster} alt={result.Title} onMouseEnter={() => openPopup(result.imdbID)} />
+              {}
+                <img src=
+                {(result.Poster !== 'N/A')
+                  ? result.Poster
+                  : posterImage}
+                alt={result.Title} onMouseEnter={() => openPopup(result.imdbID)} />
             </div>
             <div className='card-back'>
                 <h2>{result.Title} ({ result.Year })</h2>
