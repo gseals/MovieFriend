@@ -27,7 +27,7 @@ namespace MovieFriend.DataAccess
 
         public EventView GetEventByEventId(int eventId)
         {
-            var sql = @"SELECT Movie.MovieTitle, Movie.MoviePoster, [User].FirstName, [User].LastName, Event.[DateTime], Event.[Location], Event.[DateEventCreated], Event.Notes, Movie.MovieId
+            var sql = @"SELECT Movie.MovieDBId, Movie.MovieTitle, Movie.MoviePoster, [User].FirstName, [User].LastName, Event.[DateTime], Event.[Location], Event.[DateEventCreated], Event.Notes, Movie.MovieId
                         FROM Event
                         JOIN Movie on Movie.MovieId = Event.MovieId
                         JOIN [User] on [User].UserId = Event.HostId
