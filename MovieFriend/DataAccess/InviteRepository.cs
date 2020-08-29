@@ -51,5 +51,20 @@ namespace MovieFriend.DataAccess
                 return;
             }
         }
+
+        public List<User> GetInvitesForEvent(int eventId)
+        {
+            var sql = @"SELECT *
+                        FROM[Invite]
+                        JOIN[User] ON[User].UserId = Invite.UserId
+                        WHERE EventId = @eventId";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new { eventId = eventId };
+                var result = db.Query<User>(sql, parameters);
+                return result.ToList();
+            }
+        }
     }
 }

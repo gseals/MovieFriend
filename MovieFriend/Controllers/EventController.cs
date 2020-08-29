@@ -36,9 +36,11 @@ namespace MovieFriend.Controllers
         [HttpGet("events/{eventId}/")]
         public IActionResult GetEventByEventId(int eventId)
         {
-            var theseEvents = _eventRepository.GetEventByEventId(eventId);
+            var myEvent = _eventRepository.GetEventByEventId(eventId);
+            var invitees = _inviteRepository.GetInvitesForEvent(eventId);
+            myEvent.InvitedUsers = invitees;
 
-            var listOfEvent = new List<EventView> { theseEvents }; // this is a hack
+            var listOfEvent = new List<EventView> { myEvent }; // this is a hack
 
             return Ok(listOfEvent);
         }

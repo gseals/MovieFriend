@@ -16,5 +16,6 @@ namespace MovieFriend.Models
         public string MoviePoster { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public List<User> InvitedUsers { get; set; }
     }
 }
