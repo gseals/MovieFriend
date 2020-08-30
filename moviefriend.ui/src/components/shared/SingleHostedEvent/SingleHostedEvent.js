@@ -4,10 +4,9 @@ import PropTypes from 'prop-types';
 import {
   Collapse,
   Button,
-  CardBody,
-  Card,
 } from 'reactstrap';
 import moment from 'moment';
+import posterImage from '../../../img/noPoster.jpg';
 import date from '../../../helpers/data/date';
 import singleHostedEventShape from '../../../helpers/propz/singleHostedEventShape';
 import './SingleHostedEvent.scss';
@@ -58,7 +57,10 @@ class SingleHostedEvent extends Component {
                 <li>Date and time of party: {eventDateTime.format('LLL')}</li>
                 <li>This event was at {event.location}</li>
                 <li>You sent this invite out on {moment(event.dateEventCreated).format('ll')}</li>
-                <img className="eventImage" src={event.moviePoster} alt={`movie poster for ${event.movieTitle}`} />
+                <img className="eventImage" src=
+                  {(event.moviePoster !== 'N/A')
+                    ? event.moviePoster
+                    : posterImage} alt={`movie poster for ${event.movieTitle}`} />
                 <li>Movie Title: {event.movieTitle}</li>
                 <li>Notes about this event: {event.notes}</li>
                 { shouldShowButton

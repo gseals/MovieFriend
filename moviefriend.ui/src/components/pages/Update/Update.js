@@ -45,7 +45,6 @@ class Update extends React.Component {
             dateTime: event.dateTime,
             location: event.location,
             notes: event.notes,
-            invitedUsers: event.invitedUsers,
             moviePoster: event.moviePoster,
             movieTitle: event.movieTitle,
             dateEventCreated: event.dateEventCreated,
@@ -114,7 +113,6 @@ class Update extends React.Component {
         dateTime,
         location,
         notes,
-        invitedUsers,
         newInvitedUsers,
         moviePoster,
         movieTitle,
@@ -148,7 +146,7 @@ class Update extends React.Component {
           />
         </div>
         <div className="form-group">
-        <h5><label htmlFor="invites">Who are you inviting?</label></h5>
+        <h5><label htmlFor="invites">Let's redo that invite list while we're at it</label></h5>
         <Multiselect
           type="text"
           className="form-control"
@@ -156,7 +154,6 @@ class Update extends React.Component {
           options={possibleInvites.map((invite) => (`${invite.firstName} ${invite.lastName}`))}
           isObject={false}
           value={newInvitedUsers}
-          selectedValues={invitedUsers.map((invite) => (`${invite.firstName} ${invite.lastName}`))}
           onSelect={this.updatedInvitedUserAction}
           required
         />
