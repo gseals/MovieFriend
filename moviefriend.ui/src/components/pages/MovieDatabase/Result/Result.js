@@ -10,7 +10,6 @@ function Result({ result, selected, openPopup }) {
     <div className='card'>
         <div className='card-inner'>
             <div className='card-front'>
-              {}
                 <img src=
                 {(result.Poster !== 'N/A')
                   ? result.Poster
@@ -26,7 +25,9 @@ function Result({ result, selected, openPopup }) {
                     <li>Directed by: {(selected.Director !== 'N/A')
                       ? selected.Director
                       : 'Various'}</li>
-                    <li>{selected.Plot}</li>
+                        <li>Plot: {(selected.Plot !== 'N/A')
+                          ? selected.Plot
+                          : 'There is no plot listed for this movie, but just imagine how cool it would be if there were.'}</li>
                 </ul>
             </div>
         </div>

@@ -1,6 +1,5 @@
 import React from 'react';
 import moment from 'moment';
-import { Link } from 'react-router-dom';
 import SingleEvent from '../../shared/SingleEvent/SingleEvent';
 import SingleHostedEvent from '../../shared/SingleHostedEvent/SingleHostedEvent';
 import eventData from '../../../helpers/data/eventData';
