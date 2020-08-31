@@ -4,6 +4,7 @@ import SingleEvent from '../../shared/SingleEvent/SingleEvent';
 import SingleHostedEvent from '../../shared/SingleHostedEvent/SingleHostedEvent';
 import eventData from '../../../helpers/data/eventData';
 import userData from '../../../helpers/data/userData';
+import inviteData from '../../../helpers/data/inviteData';
 import './AllEvents.scss';
 
 class AllEvents extends React.Component {
@@ -39,6 +40,10 @@ class AllEvents extends React.Component {
         });
     }
 
+    deleteInviteByInviteId = (inviteId) => {
+      inviteData.deleteDataInviteByInviteId(inviteId);
+    }
+
     render() {
       const { events, hostEvents } = this.state;
       // just look at that conditional. it works so well.
@@ -71,7 +76,7 @@ class AllEvents extends React.Component {
           </div>
           <div className="FutureEvents">
           <p>Future Events</p>
-        { futureEvents.map((event) => <SingleEvent key={event.eventId} event={event} />)}
+        { futureEvents.map((event) => <SingleEvent key={event.eventId} event={event} deleteInviteByInviteId={this.deleteInviteByInviteId}/>)}
           </div>
           <div>
           <p>Events You've Hosted in the Past</p>

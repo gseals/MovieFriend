@@ -6,4 +6,6 @@ const getAllInvites = () => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-export default { getAllInvites };
+const deleteDataInviteByInviteId = (inviteId) => axios.delete(`https://localhost:44389/api/moviefriend/invites/remove/${inviteId}`);
+
+export default { getAllInvites, deleteDataInviteByInviteId };

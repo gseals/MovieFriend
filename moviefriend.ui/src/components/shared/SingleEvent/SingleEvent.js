@@ -5,6 +5,7 @@ import {
   CardBody,
   Card,
 } from 'reactstrap';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import singleEventShape from '../../../helpers/propz/singleEventShape';
 import './SingleEvent.scss';
@@ -12,6 +13,7 @@ import './SingleEvent.scss';
 class SingleEvent extends Component {
     static propTypes = {
       event: singleEventShape.singleEventShape,
+      deleteInviteByInviteId: PropTypes.func,
     }
 
     state = {
@@ -28,6 +30,13 @@ class SingleEvent extends Component {
           isOpen: false,
         });
       }
+    }
+
+    handledeleteInviteByInviteId = (e) => {
+      e.preventDefault();
+      const { deleteInviteByInviteId } = this.props;
+      const { inviteId } = this.props.event;
+      deleteInviteByInviteId(inviteId);
     }
 
     render() {
@@ -52,7 +61,7 @@ class SingleEvent extends Component {
                 <li>Movie Title: {event.movieTitle}</li>
                 <li>Notes about this event: {event.notes}</li>
                 { shouldShowButton
-                  ? <button className="btn btn-danger">Can't make this event? Remove it from your schedule.</button>
+                  ? <button className="btn btn-danger" onClick={this.handledeleteInviteByInviteId}>Can't make this event? Remove it from your schedule.</button>
                   : null
               }
             </ul>
