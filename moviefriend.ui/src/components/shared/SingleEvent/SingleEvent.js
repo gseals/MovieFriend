@@ -7,6 +7,7 @@ import {
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import posterImage from '../../../img/noPoster.jpg';
 import singleEventShape from '../../../helpers/propz/singleEventShape';
 import './SingleEvent.scss';
 
@@ -37,6 +38,7 @@ class SingleEvent extends Component {
       const { deleteInviteByInviteId } = this.props;
       const { inviteId } = this.props.event;
       deleteInviteByInviteId(inviteId);
+      window.location.reload(false);
     }
 
     render() {
@@ -57,7 +59,10 @@ class SingleEvent extends Component {
                 <li>Date and time of party: {eventDateTime.format('ll')}</li>
                 <li>This event was at {event.location}</li>
                 <li>This event was created on {moment(event.dateEventCreated).format('ll')}</li>
-                <img className="eventImage" src={event.moviePoster} alt={`movie poster for ${event.movieTitle}`} />
+                <img className="eventImage" src=
+                  {(event.moviePoster !== 'N/A')
+                    ? event.moviePoster
+                    : posterImage} alt={`movie poster for ${event.movieTitle}`} />
                 <li>Movie Title: {event.movieTitle}</li>
                 <li>Notes about this event: {event.notes}</li>
                 { shouldShowButton
