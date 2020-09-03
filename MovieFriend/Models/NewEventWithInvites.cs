@@ -16,6 +16,7 @@ namespace MovieFriend.Models
         public string Notes { get; set; }
         // this list receives an array of integers from the front end that represent users; each integer will be a userId
         public List<int> InvitedUsers{ get; set; } // [1, 2, 3, 4]
+        public string Email { get; set; }
         public string MovieTitle { get; set; }
         public string MoviePoster { get; set; }
     }

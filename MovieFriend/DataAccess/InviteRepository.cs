@@ -66,5 +66,18 @@ namespace MovieFriend.DataAccess
                 return result.ToList();
             }
         }
+        public void DeleteInviteByInviteId(int inviteId)
+        {
+            var sql = @"DELETE
+                        FROM [Invite]
+                        WHERE InviteId = @inviteId";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new { inviteId = inviteId };
+                var result = db.Execute(sql, parameters);
+                return;
+            }
+        }
     }
 }

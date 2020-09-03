@@ -27,5 +27,11 @@ namespace MovieFriend.Controllers
 
             return Ok(invites);
         }
+        [HttpDelete("invites/remove/{inviteId}")]
+        public IActionResult DeleteInviteByInviteId(int inviteId)
+        {
+            _repository.DeleteInviteByInviteId(inviteId);
+            return Ok();
+        }
     }
 }

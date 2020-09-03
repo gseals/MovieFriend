@@ -38,6 +38,7 @@ namespace MovieFriend
             services.AddTransient<MovieRepository>();
             services.AddTransient<MovieChoicesRepository>();
             services.AddTransient<UserRepository>();
+            services.AddTransient<TwilioRepository>();
             services.AddSingleton<IConfiguration>(Configuration);
         }
 

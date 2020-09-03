@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Link } from 'react-router-dom';
 
 import {
@@ -14,6 +13,7 @@ import PropTypes from 'prop-types';
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import movieFriendImage from '../../../img/moviefriend.jpg';
 
 import './MyNavBar.scss';
 
@@ -35,6 +35,14 @@ class MyNavBar extends React.Component {
     this.setState({ isOpen: !this.state.isOpen });
   }
 
+  toggleNavButton = (isOpen) => {
+    if (isOpen === true) {
+      this.setState({
+        isOpen: false,
+      });
+    }
+  }
+
   render() {
     const { authed } = this.props;
 
@@ -51,13 +59,13 @@ class MyNavBar extends React.Component {
             <Link className="nav-link navFont btn btn-info" to="/movieChoices">MovieChoices</Link>
           </NavItem> */}
           <NavItem className="nav-item">
-            <Link className="nav-link navFont btn btn-info" to="/moviedatabase">MovieDatabase</Link>
+            <Link className="nav-link navFont btn btn-info" onClick={this.toggleNav} to="/moviedatabase">MovieDatabase</Link>
           </NavItem>
           {/* <NavItem className="nav-item">
             <Link className="nav-link navFont btn btn-info" to="/movies">Movies</Link>
           </NavItem> */}
           <NavItem className="nav-item">
-            <Link className="nav-link navFont btn btn-info" to="/movienights">Movie Nights</Link>
+            <Link className="nav-link navFont btn btn-info" onClick={this.toggleNav} to="/movienights">Movie Nights</Link>
           </NavItem>
           {/* <NavItem className="nav-item">
             <Link className="nav-link navFont btn btn-info" to="/invites">Invites</Link>
@@ -76,7 +84,7 @@ class MyNavBar extends React.Component {
       <div className="MyNavBar">
                 <Navbar color="light" light expand="md" className="navbar navbar-expand-lg">
                   <NavItem>
-              <Link className="navbar-brand btn btn-info removeMarginRight" to="/">MovieF(r)iend</Link>
+              <Link className="navbar-brand btn btn-info removeMarginRight" onClick={this.toggleNavButton} to="/">{movieFriendImage}</Link>
               </NavItem>
               <NavbarToggler onClick={this.toggleNav} className="toggler" />
 

@@ -22,5 +22,6 @@ namespace MovieFriend.Models
         public string FirebaseUid { get; set; }
         public string MovieTitle { get; set; }
         public string MoviePoster { get; set; }
+        public List<User> InvitedUsers { get; set; }
     }
 }

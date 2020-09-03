@@ -16,12 +16,14 @@ namespace MovieFriend.Controllers
         EventRepository _eventRepository;
         InviteRepository _inviteRepository;
         MovieRepository _movieRepository;
+        TwilioRepository _twilioRepository;
 
-        public EventController(EventRepository repository, InviteRepository inviteRepository, MovieRepository movieRepository)
+        public EventController(EventRepository repository, InviteRepository inviteRepository, MovieRepository movieRepository, TwilioRepository twilioRepository)
         {
             _eventRepository = repository;
             _inviteRepository = inviteRepository;
             _movieRepository = movieRepository;
+            _twilioRepository = twilioRepository;
         }
         // get all events
         [HttpGet("events/all/")]
@@ -66,7 +68,8 @@ namespace MovieFriend.Controllers
         {
             var newMovie = _movieRepository.CreateMovie(NewEvent);
             var newCreatedEvent = _eventRepository.CreateEvent(NewEvent, newMovie.MovieId);
-            foreach(var userId in NewEvent.InvitedUsers)
+            _twilioRepository.Other();
+            foreach (var userId in NewEvent.InvitedUsers)
             {
                 _inviteRepository.CreateInvite(userId, newCreatedEvent.EventId);
             }
