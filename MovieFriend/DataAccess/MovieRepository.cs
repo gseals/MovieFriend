@@ -49,5 +49,19 @@ namespace MovieFriend.DataAccess
                 return;
             }
         }
+
+        public string GetMovieTitle(int movieId)
+        {
+            var sql = @"SELECT [Movie].MovieTitle
+                        FROM Movie
+                        JOIN Event ON [Event].MovieId = [Movie].MovieId
+                        WHERE [Movie].MovieId = @movieId";
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new { movieId = movieId };
+                var result = db.QueryFirstOrDefault<string>(sql, parameters);
+                return result;
+            }
+        }
     }
 }

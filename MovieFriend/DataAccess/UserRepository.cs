@@ -33,5 +33,18 @@ namespace MovieFriend.DataAccess
                 return db.QueryFirst<User>(Sql, parameters);
             }
         }
+        public string GetEmail(int userId)
+        {
+            var sql = @"SELECT [User].Email
+                        FROM [User]
+                        WHERE [User].UserId = @userId";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new { userId = userId };
+                var result = db.QueryFirstOrDefault<string>(sql, parameters);
+                return result;
+            }
+        }
     }
 }
