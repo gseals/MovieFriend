@@ -84,7 +84,7 @@ class MyNavBar extends React.Component {
       <div className="MyNavBar">
                 <Navbar color="light" light expand="md" className="navbar navbar-expand-lg">
                   <NavItem>
-              <Link className="navbar-brand btn btn-info removeMarginRight" onClick={this.toggleNavButton} to="/">{movieFriendImage}</Link>
+              <Link className="navbar-brand btn-info logoImg" to="/"><img src={movieFriendImage} alt="logo for MovieF(r)iend" /></Link>
               </NavItem>
               <NavbarToggler onClick={this.toggleNav} className="toggler" />
 
