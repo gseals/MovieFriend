@@ -14,17 +14,34 @@ import PropTypes from 'prop-types';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import movieFriendImage from '../../../img/moviefriend.jpg';
+import userData from '../../../helpers/data/userData';
 
 import './MyNavBar.scss';
 
 class MyNavBar extends React.Component {
   state = {
     isOpen: false,
+    authed: false,
+  }
+
+  loginClickEvent = (e) => {
+    e.preventDefault();
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(provider)
+      .then((user) => {
+        userData.getUserByUid();
+      });
+    this.setState({
+      authed: true,
+    });
   }
 
   logMeOut = (e) => {
     e.preventDefault();
     firebase.auth().signOut();
+    this.setState({
+      authed: false,
+    });
   }
 
   static propTypes = {
@@ -71,7 +88,7 @@ class MyNavBar extends React.Component {
             <Link className="nav-link navFont btn btn-info" to="/invites">Invites</Link>
           </NavItem> */}
           <NavItem className="nav-item">
-            <button className="nav-link navFont btn btn-danger" onClick={this.logMeOut}>Logout</button>
+<button className="nav-link navFont btn btn-danger" onClick={this.logMeOut}>Logout</button>
           </NavItem>
         </Nav>
         );
@@ -85,6 +102,12 @@ class MyNavBar extends React.Component {
                 <Navbar color="light" light expand="md" className="navbar navbar-expand-lg">
                   <NavItem>
               <Link className="navbar-brand btn-info logoImg" to="/"><img src={movieFriendImage} alt="logo for MovieF(r)iend" /></Link>
+              </NavItem>
+              <NavItem className="nav-item">
+                {(authed === false)
+                  ? <button className="btn btn-danger" onClick={this.loginClickEvent}>Login with Google</button>
+                  : null
+              }
               </NavItem>
               <NavbarToggler onClick={this.toggleNav} className="toggler" />
 

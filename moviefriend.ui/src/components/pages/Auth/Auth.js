@@ -4,6 +4,7 @@ import 'firebase/auth';
 
 import './Auth.scss';
 import userData from '../../../helpers/data/userData';
+import CarouselComponent from '../Carousel/Carousel';
 
 class Auth extends React.Component {
   loginClickEvent = (e) => {
@@ -18,8 +19,7 @@ class Auth extends React.Component {
   render() {
     return (
       <div className="Auth">
-        <h1>Plan your next movie night</h1>
-        <button className="btn btn-danger" onClick={this.loginClickEvent}>Login with Google</button>
+          <CarouselComponent/>
       </div>
     );
   }
