@@ -1,9 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import { Multiselect } from 'multiselect-react-dropdown';
-
-import OneResult from '../MovieDatabase/Result/OneResult';
-
+import CreateStepOne from './CreateStepOne';
+import ConfirmCreate from './ConfirmCreate';
 import eventData from '../../../helpers/data/eventData';
 import userData from '../../../helpers/data/userData';
 
@@ -15,6 +13,7 @@ const apiUrl = apiKeys.omdbKeys.databaseURL;
 
 class Create extends React.Component {
     state = {
+      step: 1,
       possibleInvites: [],
       imdbID: '',
       dateTime: '',
@@ -54,6 +53,22 @@ class Create extends React.Component {
       this.selectedMovie();
     }
 
+    // Proceed to the next step
+    nextStep = () => {
+      const { step } = this.state;
+      this.setState({
+        step: step + 1,
+      });
+    }
+
+    // Go back to prev step
+    prevStep = () => {
+      const { step } = this.state;
+      this.setState({
+        step: step - 1,
+      });
+    }
+
     openPopup = (id) => {
       axios(`${apiUrl}&i=${id}`).then(({ data }) => {
         const result = data;
@@ -74,6 +89,11 @@ class Create extends React.Component {
     newNotesAction = (e) => {
       e.preventDefault();
       this.setState({ notes: e.target.value });
+    }
+
+    // Handle fields change
+    handleChange = (input) => (e) => {
+      this.setState({ [input]: e.target.value });
     }
 
     newInvitedUserAction = (selectedItems, lastSelectedItem) => {
@@ -108,6 +128,7 @@ class Create extends React.Component {
     }
 
     render() {
+      const { step } = this.state;
       const {
         possibleInvites,
         dateTime,
@@ -116,74 +137,38 @@ class Create extends React.Component {
         invitedUsers,
         selected,
       } = this.state;
+      const values = {
+        possibleInvites,
+        dateTime,
+        location,
+        notes,
+        invitedUsers,
+        selected,
+      };
 
-      return (
-        <div>
-        <div className="Create col-10 m-auto">
-        <h1 className="textColor marginTop">Let's plan your next movie night</h1>
-        <form onSubmit={this.saveMovieEvent} className="Create col-6 m-auto">
-        <div className="centered">
-        <h2 className="textColor marginTop">{selected.Title}? Excellent choice!</h2>
-        <OneResult
-          key={selected.imdbID}
-          selected={selected}
-          openPopup={this.openPopup}
-        />
-        </div>
-        <div className="form-group">
-          <h3><label htmlFor="dateTime"></label></h3>
-          <input
-          type="datetime-local"
-          className="form-control"
-          id="dateTime"
-          placeholder="Date and Time of event"
-          value={dateTime}
-          onChange={this.newDateAndTimeOfEventAction}
-          required
-          />
-        </div>
-        <div className="form-group">
-        <h5><label htmlFor="invites">Who are you inviting?</label></h5>
-        <Multiselect
-          type="text"
-          className="form-control"
-          id="invites"
-          options={possibleInvites.map((invite) => (`${invite.firstName} ${invite.lastName}`))}
-          isObject={false}
-          value={invitedUsers}
-          onSelect={this.newInvitedUserAction}
-          required
-        />
-        </div>
-        <div className="form-group">
-          <h3><label htmlFor="location"></label></h3>
-          <input
-          type="text"
-          className="form-control"
-          id="location"
-          placeholder="Location?"
-          value={location}
-          onChange={this.newLocationAction}
-          required
-          />
-        </div>
-        <div className="form-group">
-          <h3><label htmlFor="notes"></label></h3>
-          <textarea
-          type="text"
-          className="form-control"
-          id="notes"
-          placeholder="Notes"
-          value={notes}
-          onChange={this.newNotesAction}
-          required
-          />
-        </div>
-        <button type="submit" className="btn btn-success">Create that movie night</button>
-      </form>
-      </div>
-            </div>
-      );
+      switch (step) {
+        case 1:
+          return (
+            <CreateStepOne
+              nextStep={this.nextStep}
+              handleChange={this.handleChange}
+              openPopup={this.openPopup}
+              newInvitedUserAction={this.newInvitedUserAction}
+              values={values}
+            />
+          );
+        case 2:
+          return (
+            <ConfirmCreate
+            nextStep={this.nextStep}
+            prevStep={this.prevStep}
+            saveMovieEvent={this.saveMovieEvent}
+            values={values}
+            />
+          );
+        default:
+          return <h2>Something went wrong</h2>;
+      }
     }
 }
 

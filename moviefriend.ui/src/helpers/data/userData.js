@@ -9,6 +9,12 @@ const getAllUsers = () => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+const getUserByUserId = (userId) => new Promise((resolve, reject) => {
+  axios.get(`https://localhost:44389/api/moviefriend/users/id/${userId}`)
+    .then((result) => resolve(result.data))
+    .catch((error) => reject(error));
+});
+
 const getUid = () => firebase.auth().currentUser.uid;
 
 const getUserByUid = () => {
@@ -27,4 +33,5 @@ export default {
   getUid,
   getUserByUid,
   getLoggedInUserId,
+  getUserByUserId,
 };
