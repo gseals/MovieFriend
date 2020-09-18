@@ -72,19 +72,27 @@ class AllEvents extends React.Component {
         <div className="AllEvents">
           <div className="PastEvents">
           <p>Past Events</p>
-        { pastEvents.map((event) => <SingleEvent key={event.eventId} event={event} />)}
+        {(pastEvents.length === 0)
+          ? <p>You haven't attended any movie nights yet. Maybe you should plan one.</p>
+          : pastEvents.map((event) => <SingleEvent key={event.eventId} event={event} />)}
           </div>
           <div className="FutureEvents">
           <p>Future Events</p>
-        { futureEvents.map((event) => <SingleEvent key={event.eventId} event={event} deleteInviteByInviteId={this.deleteInviteByInviteId}/>)}
+        {(futureEvents.length === 0)
+          ? <p>No upcoming events. You should see if people want to get together.</p>
+          : futureEvents.map((event) => <SingleEvent key={event.eventId} event={event} deleteInviteByInviteId={this.deleteInviteByInviteId}/>)}
           </div>
           <div>
           <p>Events You've Hosted in the Past</p>
-        { pastHostedEvents.map((event) => <SingleHostedEvent key={event.eventId} event={event} />)}
+        {(pastHostedEvents.length === 0)
+          ? <p>You haven't hosted any movie nights yet. Maybe you should plan one.</p>
+          : pastHostedEvents.map((event) => <SingleHostedEvent key={event.eventId} event={event} />)}
           </div>
           <div>
           <p>Upcoming Events You are Hosting</p>
-        { futureHostedEvents.map((event) => <SingleHostedEvent key={event.eventId} event={event} deleteEventAndInviteAndMovie={this.deleteEventAndInviteAndMovie} />)}
+        {(futureHostedEvents.length === 0)
+          ? <p>You aren't hosting any movie nights. It's time to plan one.</p>
+          : futureHostedEvents.map((event) => <SingleHostedEvent key={event.eventId} event={event} deleteEventAndInviteAndMovie={this.deleteEventAndInviteAndMovie} />)}
           </div>
         </div>
       );

@@ -22,18 +22,6 @@ export class ConfirmCreate extends Component {
       this.props.prevStep();
     };
 
-    newInvitedUserName = (selectedItems, lastSelectedItem) => {
-      const selectedFirstName = lastSelectedItem.split(' ')[0];
-      const selectedLastName = lastSelectedItem.split(' ')[1];
-      const selectedUser = this.state.possibleInvites.find((user) => user.firstName === selectedFirstName && user.lastName === selectedLastName);
-      this.setState({
-        invitedUsers: [
-          ...this.state.invitedUserName,
-          selectedUser.userId,
-        ],
-      });
-    }
-
     render() {
       const {
         saveMovieEvent,
@@ -45,6 +33,7 @@ export class ConfirmCreate extends Component {
           invitedUsers,
           selected,
           possibleInvites,
+          names,
         },
       } = this.props;
 
@@ -60,7 +49,7 @@ export class ConfirmCreate extends Component {
               <ListItem
                 primaryText="Movie Poster">
               </ListItem>
-                <img src={ selected.Poster} alt={ selected.Title }/>
+                <img src={ selected.Poster } alt={ selected.Title }/>
               <ListItem
                 primaryText="Date and Time of Event"
                 secondaryText={ moment(dateTime).format('lll') }
@@ -75,7 +64,8 @@ export class ConfirmCreate extends Component {
               />
               <ListItem
                 primaryText="Who you've invited"
-                secondaryText={ invitedUsers }
+                secondaryText={ names }
+                // secondaryText={ invitedUsers }
               />
             </List>
             <br/>

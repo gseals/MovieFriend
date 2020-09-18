@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import CreateStepOne from './CreateStepOne';
-import ConfirmCreate from './ConfirmCreate';
+import { ConfirmCreate } from './ConfirmCreate';
 import eventData from '../../../helpers/data/eventData';
 import userData from '../../../helpers/data/userData';
 
@@ -21,6 +21,7 @@ class Create extends React.Component {
       notes: '',
       invitedUsers: [],
       selected: {},
+      names: [],
     }
 
     allPossibleInvites = () => {
@@ -66,6 +67,8 @@ class Create extends React.Component {
       const { step } = this.state;
       this.setState({
         step: step - 1,
+        invitedUsers: [],
+        names: [],
       });
     }
 
@@ -105,6 +108,10 @@ class Create extends React.Component {
           ...this.state.invitedUsers,
           selectedUser.userId,
         ],
+        names: [
+          ...this.state.names,
+          `${selectedUser.firstName} ${selectedUser.lastName}`,
+        ],
       });
     }
 
@@ -136,6 +143,9 @@ class Create extends React.Component {
         notes,
         invitedUsers,
         selected,
+        firstName,
+        lastName,
+        names,
       } = this.state;
       const values = {
         possibleInvites,
@@ -144,6 +154,9 @@ class Create extends React.Component {
         notes,
         invitedUsers,
         selected,
+        firstName,
+        lastName,
+        names,
       };
 
       switch (step) {
