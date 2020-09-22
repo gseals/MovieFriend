@@ -5,6 +5,7 @@ import AppBar from 'material-ui/AppBar';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import OneResult from '../MovieDatabase/Result/OneResult';
+import './Create.scss';
 
 class CreateStepOne extends Component {
     continue = (e) => {
@@ -29,11 +30,13 @@ class CreateStepOne extends Component {
                 <React.Fragment>
                     <AppBar title="Let's plan your next movie night"/>
                     <h2 className="textColor marginTop">{values.selected.Title}? Excellent choice!</h2>
+                    <div className="centerImg">
                     <OneResult
                         key={values.selected.imdbID}
                         selected={values.selected}
                         openPopup={openPopup}
                     />
+                    </div>
                     <br/>
                     <Multiselect
                         options={values.possibleInvites.map((invite) => (`${invite.firstName} ${invite.lastName}`))}

@@ -4,7 +4,6 @@ import AppBar from 'material-ui/AppBar';
 import { List, ListItem } from 'material-ui/List';
 import RaisedButton from 'material-ui/RaisedButton';
 import moment from 'moment';
-import userData from '../../../helpers/data/userData';
 
 export class ConfirmCreate extends Component {
   state = {

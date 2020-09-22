@@ -110,7 +110,7 @@ class Create extends React.Component {
         ],
         names: [
           ...this.state.names,
-          `${selectedUser.firstName} ${selectedUser.lastName}`,
+          `${selectedUser.firstName} ${selectedUser.lastName}, `,
         ],
       });
     }
