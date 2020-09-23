@@ -12,7 +12,6 @@ export class ConfirmCreate extends Component {
 
     continue = (e) => {
       e.preventDefault();
-      // PROCESS FORM // API AND METHOD GO HERE
       this.props.nextStep();
     };
 

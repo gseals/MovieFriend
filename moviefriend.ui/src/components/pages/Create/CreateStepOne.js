@@ -28,7 +28,6 @@ class CreateStepOne extends Component {
         return (
             <MuiThemeProvider>
                 <React.Fragment>
-                    <AppBar title="Let's plan your next movie night"/>
                     <h2 className="textColor marginTop">{values.selected.Title}? Excellent choice!</h2>
                     <div className="centerImg">
                     <OneResult
@@ -45,6 +44,7 @@ class CreateStepOne extends Component {
                         onSelect={newInvitedUserAction}
                         onChange={handleChange('invitedUsers')}
                         required
+                        className="multiSelect"
                     />
                     <br/>
                     {/* <form className={classes.container} noValidate > */}
