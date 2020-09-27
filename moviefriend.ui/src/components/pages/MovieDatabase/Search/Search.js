@@ -16,7 +16,6 @@ function Search({ handleInput, search }) {
           onKeyPress={search}
           />
       </Paper>
-      <h1>Click on a movie to begin planning your night</h1>
     </React.Fragment>
   );
 }

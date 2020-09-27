@@ -7,7 +7,6 @@ import {
 } from 'reactstrap';
 import moment from 'moment';
 import posterImage from '../../../img/noPoster.jpg';
-import date from '../../../helpers/data/date';
 import singleHostedEventShape from '../../../helpers/propz/singleHostedEventShape';
 import './SingleHostedEvent.scss';
 
@@ -51,31 +50,29 @@ class SingleHostedEvent extends Component {
       <div className="SingleHostedEvent">
         <Button color="primary" onClick={() => this.toggle(isOpen)} style={{ marginBottom: '1rem' }}>{eventDateTime.format('LLL')}</Button>
         <Collapse isOpen={isOpen}>
-                {/* <li>EventId: {event.eventId}</li>
-                <li>MovieId: {event.movieId}</li>
-                <li>HostId: {event.hostId}</li> */}
-                <li>Date and time of party: {eventDateTime.format('LLL')}</li>
-                <li>This event was at {event.location}</li>
-                <li>You sent this invite out on {moment(event.dateEventCreated).format('ll')}</li>
+          <div className="singleEventCard">
                 <img className="eventImage" src=
                   {(event.moviePoster !== 'N/A')
                     ? event.moviePoster
                     : posterImage} alt={`movie poster for ${event.movieTitle}`} />
-                <li>Movie Title: {event.movieTitle}</li>
-                <li>Notes about this event: {event.notes}</li>
+                <p>{event.movieTitle}</p>
+                <p>{eventDateTime.format('LLL')}</p>
+                <p>Notes: {event.notes}</p>
+                <p>Location: {event.location}</p>
+                <p>You sent this invite out on {moment(event.dateEventCreated).format('ll')}</p>
                 { shouldShowButton
                   ? <div>
                 <button className="btn btn-danger" onClick={this.handleDeleteEventAndInviteAndMovie}>
                 Delete this event
                 </button>
+                <br/>
                 <Link className="btn btn-success" to={`/movieNights/${eventId}/update`}>
                 Edit this event
                 </Link>
                 </div>
                   : null
                 }
-            <ul>
-            </ul>
+                </div>
       </Collapse>
       </div>
       );

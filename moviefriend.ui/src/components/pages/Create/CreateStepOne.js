@@ -28,7 +28,7 @@ class CreateStepOne extends Component {
         return (
             <MuiThemeProvider>
                 <React.Fragment>
-                    <h2 className="textColor marginTop">{values.selected.Title}? Excellent choice!</h2>
+                    <AppBar title={`${values.selected.Title}? Excellent choice!`} showMenuIconButton={false} />
                     <div className="centerImg">
                     <OneResult
                         key={values.selected.imdbID}
@@ -47,20 +47,17 @@ class CreateStepOne extends Component {
                         className="multiSelect"
                     />
                     <br/>
-                    {/* <form className={classes.container} noValidate > */}
                     <TextField
                       id="datetime-local"
                       label="Date and Time of event"
                       type="datetime-local"
                       defaultValue="2017-05-24T10:30"
-                    //   className={classes.textField}
                       InputLabelProps={{
                         shrink: true,
                       }}
                       onChange={handleChange('dateTime')}
                       defaultValue={values.dateTime}
                     />
-                    {/* </form> */}
                     <br/>
                     <TextField
                       hintText="Location?"
@@ -93,9 +90,5 @@ const styles = {
     margin: 15,
   },
 };
-
-// const classes = {
-
-// }
 
 export default CreateStepOne;

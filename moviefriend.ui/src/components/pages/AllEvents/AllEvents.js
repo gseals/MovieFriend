@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import AppBar from 'material-ui/AppBar';
 import moment from 'moment';
 import SingleEvent from '../../shared/SingleEvent/SingleEvent';
 import SingleHostedEvent from '../../shared/SingleHostedEvent/SingleHostedEvent';
@@ -71,56 +73,64 @@ class AllEvents extends React.Component {
       }
 
       return (
+        <MuiThemeProvider>
+          <AppBar title="Your Events" showMenuIconButton={false}/>
+          <br/>
         <div className="AllEvents">
           <div className="PastEvents">
-          <p>Events You've Attended</p>
+          <Button variant="contained" className="event-title">Events You've Attended</Button>
+          <br/>
+          <br/>
+
         {(pastEvents.length === 0)
-          ? <p>You haven't attended any movie nights yet.
-              <Link to={'/moviedatabase/'}>
+          ? <Link to={'/moviedatabase/'}>
                 <Button variant="contained" color="secondary">
-                You should see if people want to get together.
+                You haven't attended any movie nights yet. You should see if people want to get together.
                 </Button>
               </Link>
-            </p>
           : pastEvents.map((event) => <SingleEvent key={event.eventId} event={event} />)}
           </div>
+          <br/>
           <div className="FutureEvents">
-          <p>Events You're Attending</p>
+          <Button variant="contained" className="event-title">Events You're Attending</Button>
+          <br/>
+          <br/>
         {(futureEvents.length === 0)
-          ? <p>No upcoming events.
-              <Link to={'/moviedatabase/'}>
+          ? <Link to={'/moviedatabase/'}>
                 <Button variant="contained" color="secondary">
-                You should see if people want to get together.
+                No upcoming events. You should see if people want to get together.
                 </Button>
               </Link>
-            </p>
           : futureEvents.map((event) => <SingleEvent key={event.eventId} event={event} deleteInviteByInviteId={this.deleteInviteByInviteId}/>)}
           </div>
+          <br/>
           <div>
-          <p>Events You've Hosted</p>
+            <Button variant="contained" className="event-title">Events You've Hosted</Button>
+            <br/>
+            <br/>
         {(pastHostedEvents.length === 0)
-          ? <p>You haven't hosted any movie nights yet.
-              <Link to={'/moviedatabase/'}>
+          ? <Link to={'/moviedatabase/'}>
                 <Button variant="contained" color="primary">
-                  It's time to plan one.
+                You haven't hosted any movie nights yet. It's time to plan one.
               </Button>
             </Link>
-          </p>
           : pastHostedEvents.map((event) => <SingleHostedEvent key={event.eventId} event={event} />)}
           </div>
+          <br/>
           <div>
-          <p>Events You're Hosting</p>
+            <Button variant="contained" className="event-title">Events You're Hosting</Button>
+            <br/>
+            <br/>
         {(futureHostedEvents.length === 0)
-          ? <p>You aren't hosting any movie nights.
-            <Link to={'/moviedatabase/'}>
+          ? <Link to={'/moviedatabase/'}>
               <Button variant="contained" color="primary">
-            It's time to plan one.
+              You aren't hosting any movie nights. It's time to plan one.
               </Button>
             </Link>
-          </p>
           : futureHostedEvents.map((event) => <SingleHostedEvent key={event.eventId} event={event} deleteEventAndInviteAndMovie={this.deleteEventAndInviteAndMovie} />)}
           </div>
         </div>
+        </MuiThemeProvider>
       );
     }
 }

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import AppBar from 'material-ui/AppBar';
+import { MuiThemeProvider } from 'material-ui/styles';
 import Search from '../Search/Search';
 import Results from '../Results/Results';
 
@@ -42,9 +44,10 @@ function MovieDatabase() {
 
   return (
     <div className="App">
-      <header>
-        <h1><span>Find Your Next Favorite Movie</span></h1>
-      </header>
+      <MuiThemeProvider>
+        <AppBar title="Find Your Next Favorite Movie. Click on a movie to begin planning your event." showMenuIconButton={false}/>
+      </MuiThemeProvider>
+      <br/>
       <main>
         <Search handleInput={handleInput} search={search} />
         <Results results={state.results} selected={state.selected} openPopup={openPopup} />

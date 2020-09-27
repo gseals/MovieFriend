@@ -9,10 +9,6 @@ import 'firebase/auth';
 import firebaseConnection from '../helpers/data/connection';
 
 import Auth from '../components/pages/Auth/Auth';
-import AllUsers from '../components/pages/AllUsers/AllUsers';
-import AllMovieChoices from '../components/pages/AllMovieChoices/AllMovieChoices';
-import AllMovies from '../components/pages/AllMovies/AllMovies';
-import AllInvites from '../components/pages/AllInvites/AllInvites';
 import Create from '../components/pages/Create/Create';
 import Update from '../components/pages/Update/Update';
 import AllEvents from '../components/pages/AllEvents/AllEvents';
@@ -63,15 +59,11 @@ class App extends Component {
         <Switch>
           <PublicRoute path="/auth" exact component={Auth} authed={authed}/>
 
-          {/* <PrivateRoute path="/users" exact component={AllUsers} authed={authed} />
-          <PrivateRoute path="/moviechoices" exact component={AllMovieChoices} authed={authed} /> */}
           <PrivateRoute path="/" exact component={MovieDatabase} authed={authed} />
           <PrivateRoute path="/movieDatabase" exact component={MovieDatabase} authed={authed} />
           <PrivateRoute path="/movieNights/:imdbID/create" exact component={Create} authed={authed}/>
           <PrivateRoute path="/movieNights/:eventId/update" exact component={Update} authed={authed}/>
-          {/* <PrivateRoute path="/movies" exact component={AllMovies} authed={authed} /> */}
           <PrivateRoute path="/movieNights" exact component={AllEvents} authed={authed} />
-          {/* <PrivateRoute path="/invites" exact component={AllInvites}authed={authed} /> */}
         </Switch>
         </div>
       </Router>

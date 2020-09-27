@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import {
   Collapse,
   Button,
@@ -51,26 +50,23 @@ class SingleEvent extends Component {
 
       return (
         <div className="SingleEvent">
-                  <Button color="primary" onClick={() => this.toggle(isOpen)} style={{ marginBottom: '1rem' }}>{eventDateTime.format('LLL')}</Button>
-        <Collapse isOpen={isOpen}>
-            <ul>
-                {/* <li>EventId: {event.eventId}</li>
-                <li>MovieId: {event.movieId}</li>
-                <li>HostId: {event.hostId}</li> */}
-                <li>Date and time of party: {eventDateTime.format('ll')}</li>
-                <li>This event was at {event.location}</li>
-                <li>This event was created on {moment(event.dateEventCreated).format('ll')}</li>
+          <Button color="primary" onClick={() => this.toggle(isOpen)} style={{ marginBottom: '1rem' }}>{eventDateTime.format('LLL')}</Button>
+          <Collapse isOpen={isOpen}>
+            <div className="singleEventCard">
                 <img className="eventImage" src=
                   {(event.moviePoster !== 'N/A')
                     ? event.moviePoster
                     : posterImage} alt={`movie poster for ${event.movieTitle}`} />
-                <li>Movie Title: {event.movieTitle}</li>
-                <li>Notes about this event: {event.notes}</li>
+                <p>{event.movieTitle}</p>
+                <p>Time and Date of Event: {eventDateTime.format('ll')}</p>
+                <p>Notes: {event.notes}</p>
+                <p>Location: {event.location}</p>
+                <p>This event was created on {moment(event.dateEventCreated).format('ll')}</p>
                 { shouldShowButton
                   ? <button className="btn btn-danger" onClick={this.handledeleteInviteByInviteId}>Can't make this event? Remove it from your schedule.</button>
                   : null
               }
-            </ul>
+            </div>
             </Collapse>
         </div>
       );

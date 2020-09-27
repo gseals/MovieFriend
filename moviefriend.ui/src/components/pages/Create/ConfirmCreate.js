@@ -40,13 +40,6 @@ export class ConfirmCreate extends Component {
           <React.Fragment>
             <AppBar title="Confirm Invite Information" />
             <List>
-              <ListItem
-                primaryText="Movie"
-                secondaryText={ selected.Title }
-              />
-              <ListItem
-                primaryText="Movie Poster">
-              </ListItem>
                 <img src={ selected.Poster } alt={ selected.Title }/>
               <ListItem
                 primaryText="Date and Time of Event"
