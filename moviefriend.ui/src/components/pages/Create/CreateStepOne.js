@@ -38,6 +38,7 @@ class CreateStepOne extends Component {
                     </div>
                     <br/>
                     <Multiselect
+                        style={styles.input}
                         options={values.possibleInvites.map((invite) => (`${invite.firstName} ${invite.lastName}`))}
                         isObject={false}
                         value={values.invitedUsers}
@@ -57,6 +58,7 @@ class CreateStepOne extends Component {
                       }}
                       onChange={handleChange('dateTime')}
                       defaultValue={values.dateTime}
+                      style={styles.input}
                     />
                     <br/>
                     <TextField
@@ -64,6 +66,7 @@ class CreateStepOne extends Component {
                       floatingLabelText="Location?"
                       onChange={handleChange('location')}
                       defaultValue={values.location}
+                      style={styles.input}
                     />
                     <br/>
                     <TextField
@@ -71,6 +74,7 @@ class CreateStepOne extends Component {
                       floatingLabelText="Notes"
                       onChange={handleChange('notes')}
                       defaultValue={values.notes}
+                      style={styles.input}
                     />
                     <br/>
                     <RaisedButton
@@ -88,6 +92,9 @@ class CreateStepOne extends Component {
 const styles = {
   button: {
     margin: 15,
+  },
+  input: {
+    background: 'white',
   },
 };
 

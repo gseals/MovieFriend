@@ -44,19 +44,26 @@ export class ConfirmCreate extends Component {
               <ListItem
                 primaryText="Date and Time of Event"
                 secondaryText={ moment(dateTime).format('lll') }
+                style={styles.input}
+                width={1 / 4}
               />
               <ListItem
                 primaryText="Location of Event"
                 secondaryText={ location }
+                style={styles.input}
+                width={1 / 4}
               />
               <ListItem
                 primaryText="Notes on this event"
                 secondaryText={ notes }
+                style={styles.input}
+                width={1 / 4}
               />
               <ListItem
                 primaryText="Who you've invited"
                 secondaryText={ names }
-                // secondaryText={ invitedUsers }
+                style={styles.input}
+                width={1 / 4}
               />
             </List>
             <br/>
@@ -81,6 +88,9 @@ export class ConfirmCreate extends Component {
 const styles = {
   button: {
     margin: 15,
+  },
+  input: {
+    background: 'gray',
   },
 };
 
